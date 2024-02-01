@@ -1,0 +1,6 @@
+[book]
+authors = ["lyf"]
+language = "en"
+multilingual = false
+src = "src"
+title = "实现领域驱动设计"
