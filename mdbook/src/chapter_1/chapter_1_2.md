@@ -56,7 +56,7 @@ A different, yet related problem is when one or more domain experts do not agree
 
 Worse still is when the technical approach to software development actually wrongly changes the way the business functions. While a different scenario, it is well known that enterprise resource planning (ERP) software will often change the overall business operations of an organization to fit the way the ERP functions. The total cost of owning the ERP cannot be fully calculated in terms of license and maintenance fees. The reorganization and disruption to the business can be far more costly than either of those two tangible factors. A similar dynamic is at play as your software development teams interpret what the business needs into what the newly developed software actually does. This can be both costly and disruptive to the business, its customers, and its partners. Furthermore, this technical interpretation is both unnecessary and avoidable with the use of proven software development techniques. The solution is a key investment.   
 
-更糟糕的是，软件开发的技术方法实际上错误地改变了企业的运作方式。虽然情况不同，但众所周知，企业资源规划（ERP）软件往往会改变组织的整体业务运作，以适应ERP的运作方式。拥有企业资源规划系统的总成本不能完全以许可证和维护费用来计算。业务重组和中断的成本可能远远超过这两个有形因素。当软件开发团队将业务需求转化为新开发软件的实际功能时，也会发生类似的动态变化。这对企业、其客户和合作伙伴来说既昂贵又具有破坏性。此外，通过使用成熟的软件开发技术，这种技术解释是不必要的，也是可以避免的。解决方案是一项关键投资。
+更糟糕的是，软件开发的技术方法实际上错误地改变了企业的运作方式。虽然情况不同，但众所周知，企业资源规划（ERP）软件往往会改变组织的整体业务运作，以适应ERP的运作方式。拥有ERP系统的总成本不能完全以许可证和维护费用来计算。业务重组和中断的成本可能远远超过这两个有形因素。当软件开发团队将业务需求转化为新开发软件的实际功能时，也会发生类似的动态变化。这对企业、其客户和合作伙伴来说既昂贵又具有破坏性。 此外，通过使用成熟的软件开发技术，这种技术解释是不必要的，也是可以避免的。解决方案是一项关键投资。
 
 ## How DDD Helps   
 
