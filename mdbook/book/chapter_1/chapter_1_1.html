@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="en,zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Can I DDD - 实现领域驱动设计</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../chapter_1/index.html"><strong aria-hidden="true">1.</strong> Chapter 1  Getting Started with DDD</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_1.html" class="active"><strong aria-hidden="true">1.1.</strong> Can I DDD</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_2.html"><strong aria-hidden="true">1.2.</strong> Why You Should Do DDD</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_3.html"><strong aria-hidden="true">1.3.</strong> How to Do DDD </a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_4.html"><strong aria-hidden="true">1.4.</strong> The Business Value of Using DDD</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_5.html"><strong aria-hidden="true">1.5.</strong> The Challenges of Applying DDD</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_6.html"><strong aria-hidden="true">1.6.</strong> Fiction, with Bucketfuls of Reality</a></li><li class="chapter-item expanded "><a href="../chapter_1/chapter_1_7.html"><strong aria-hidden="true">1.7.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_2/index.html"><strong aria-hidden="true">2.</strong> Chapter 2  Domains, Subdomains, and Bounded Contexts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_1.html"><strong aria-hidden="true">2.1.</strong> Big Picture</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_2.html"><strong aria-hidden="true">2.2.</strong> Why Strategic Design Is So Incredibly Essential</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_3.html"><strong aria-hidden="true">2.3.</strong> Real-World Domains and Subdomains</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_4.html"><strong aria-hidden="true">2.4.</strong> Making Sense of Bounded Contexts</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_5.html"><strong aria-hidden="true">2.5.</strong> Sample Contexts</a></li><li class="chapter-item expanded "><a href="../chapter_2/chapter_2_6.html"><strong aria-hidden="true">2.6.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_3/index.html"><strong aria-hidden="true">3.</strong> Chapter 3 Context Maps</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_3/chapter_3_1.html"><strong aria-hidden="true">3.1.</strong> Why Context Maps Are So Essential</a></li><li class="chapter-item expanded "><a href="../chapter_3/chapter_3_2.html"><strong aria-hidden="true">3.2.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_4/index.html"><strong aria-hidden="true">4.</strong> Chapter 4 Architecture</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_1.html"><strong aria-hidden="true">4.1.</strong> Interviewing the Successful CIO</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_2.html"><strong aria-hidden="true">4.2.</strong> Layers</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_3.html"><strong aria-hidden="true">4.3.</strong> Hexagonal or Ports and Adapters</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_4.html"><strong aria-hidden="true">4.4.</strong> Service-Oriented</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_5.html"><strong aria-hidden="true">4.5.</strong> Representational State Transfer—REST</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_6.html"><strong aria-hidden="true">4.6.</strong> Command-Query Responsibility Segregation, or CQRS</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_7.html"><strong aria-hidden="true">4.7.</strong> Event-Driven Architecture</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_8.html"><strong aria-hidden="true">4.8.</strong> Data Fabric and Grid-Based Distributed Computing</a></li><li class="chapter-item expanded "><a href="../chapter_4/chapter_4_9.html"><strong aria-hidden="true">4.9.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_5/index.html"><strong aria-hidden="true">5.</strong> Chapter 5 Entities</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_5/chapter_5_1.html"><strong aria-hidden="true">5.1.</strong> Why We Use Entities</a></li><li class="chapter-item expanded "><a href="../chapter_5/chapter_5_2.html"><strong aria-hidden="true">5.2.</strong> Unique Identity</a></li><li class="chapter-item expanded "><a href="../chapter_5/chapter_5_3.html"><strong aria-hidden="true">5.3.</strong> Discovering Entities and Their Intrinsic Characteristics</a></li><li class="chapter-item expanded "><a href="../chapter_5/chapter_5_4.html"><strong aria-hidden="true">5.4.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_6/index.html"><strong aria-hidden="true">6.</strong> Chapter 6 Value Objects</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_0.html"><strong aria-hidden="true">6.1.</strong> Value Characteristics</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_1.html"><strong aria-hidden="true">6.2.</strong> Integrate with Minimalism</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_2.html"><strong aria-hidden="true">6.3.</strong> Standard Types Expressed as Values</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_3.html"><strong aria-hidden="true">6.4.</strong> Testing Value Objects</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_4.html"><strong aria-hidden="true">6.5.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_5.html"><strong aria-hidden="true">6.6.</strong> Persisting Value Objects</a></li><li class="chapter-item expanded "><a href="../chapter_6/chapter_6_6.html"><strong aria-hidden="true">6.7.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_7/index.html"><strong aria-hidden="true">7.</strong> Chapter 7 Services</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_7/chapter_7_0.html"><strong aria-hidden="true">7.1.</strong> What a Domain Service Is (but First, What It Is Not)</a></li><li class="chapter-item expanded "><a href="../chapter_7/chapter_7_1.html"><strong aria-hidden="true">7.2.</strong> Make Sure You Need a Service</a></li><li class="chapter-item expanded "><a href="../chapter_7/chapter_7_2.html"><strong aria-hidden="true">7.3.</strong> Modeling a Service in the Domain</a></li><li class="chapter-item expanded "><a href="../chapter_7/chapter_7_3.html"><strong aria-hidden="true">7.4.</strong> Testing Services</a></li><li class="chapter-item expanded "><a href="../chapter_7/chapter_7_4.html"><strong aria-hidden="true">7.5.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_8/index.html"><strong aria-hidden="true">8.</strong> Chapter 8 Domain Events</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_0.html"><strong aria-hidden="true">8.1.</strong> The When and Why of Domain Events</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_1.html"><strong aria-hidden="true">8.2.</strong> Modeling Events</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_2.html"><strong aria-hidden="true">8.3.</strong> Publishing Events from the Domain Model</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_3.html"><strong aria-hidden="true">8.4.</strong> Spreading the News to Remote Bounded Contexts</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_4.html"><strong aria-hidden="true">8.5.</strong> Event Store</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_5.html"><strong aria-hidden="true">8.6.</strong> Architectural Styles for Forwarding Stored Events</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_6.html"><strong aria-hidden="true">8.7.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="../chapter_8/chapter_8_7.html"><strong aria-hidden="true">8.8.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_9/index.html"><strong aria-hidden="true">9.</strong> Chapter 9 Modules</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_0.html"><strong aria-hidden="true">9.1.</strong> Designing with Modules</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_1.html"><strong aria-hidden="true">9.2.</strong> Basic Module Naming Conventions</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_2.html"><strong aria-hidden="true">9.3.</strong> Module Naming Conventions for the Model</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_3.html"><strong aria-hidden="true">9.4.</strong> Modules of the Agile Project Management Context</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_4.html"><strong aria-hidden="true">9.5.</strong> Modules in Other Layers</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_5.html"><strong aria-hidden="true">9.6.</strong> Module before Bounded Context</a></li><li class="chapter-item expanded "><a href="../chapter_9/chapter_9_6.html"><strong aria-hidden="true">9.7.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_10/index.html"><strong aria-hidden="true">10.</strong> Chapter 10 Aggregates</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_0.html"><strong aria-hidden="true">10.1.</strong> Using Aggregates in the Scrum Core Domain</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_1.html"><strong aria-hidden="true">10.2.</strong> Rule: Model True Invariants in Consistency Boundaries</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_2.html"><strong aria-hidden="true">10.3.</strong> Rule: Design Small Aggregates</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_3.html"><strong aria-hidden="true">10.4.</strong> Rule: Reference Other Aggregates by Identity</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_4.html"><strong aria-hidden="true">10.5.</strong> Rule: Use Eventual Consistency Outside the Boundary</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_5.html"><strong aria-hidden="true">10.6.</strong> Reasons to Break the Rules</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_6.html"><strong aria-hidden="true">10.7.</strong> Gaining Insight through Discovery</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_7.html"><strong aria-hidden="true">10.8.</strong> Implementation</a></li><li class="chapter-item expanded "><a href="../chapter_10/chapter_10_8.html"><strong aria-hidden="true">10.9.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_11/index.html"><strong aria-hidden="true">11.</strong> Chapter 11 Factories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_11/chapter_11_0.html"><strong aria-hidden="true">11.1.</strong> Factories in the Domain Model</a></li><li class="chapter-item expanded "><a href="../chapter_11/chapter_11_1.html"><strong aria-hidden="true">11.2.</strong> Factory Method on Aggregate Root</a></li><li class="chapter-item expanded "><a href="../chapter_11/chapter_11_2.html"><strong aria-hidden="true">11.3.</strong> Factory on Service</a></li><li class="chapter-item expanded "><a href="../chapter_11/chapter_11_3.html"><strong aria-hidden="true">11.4.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_12/index.html"><strong aria-hidden="true">12.</strong> Chapter 12 Repositories</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_0.html"><strong aria-hidden="true">12.1.</strong> Collection-Oriented Repositories</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_1.html"><strong aria-hidden="true">12.2.</strong> Persistence-Oriented Repositories</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_2.html"><strong aria-hidden="true">12.3.</strong> Additional Behavior</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_3.html"><strong aria-hidden="true">12.4.</strong> Managing Transactions</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_4.html"><strong aria-hidden="true">12.5.</strong> Type Hierarchies</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_5.html"><strong aria-hidden="true">12.6.</strong> Repository versus Data Access Object</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_6.html"><strong aria-hidden="true">12.7.</strong> Testing Repositories</a></li><li class="chapter-item expanded "><a href="../chapter_12/chapter_12_7.html"><strong aria-hidden="true">12.8.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_13/index.html"><strong aria-hidden="true">13.</strong> Chapter 13 Integrating Bounded Contexts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_13/chapter_13_0.html"><strong aria-hidden="true">13.1.</strong> Integration Basics</a></li><li class="chapter-item expanded "><a href="../chapter_13/chapter_13_1.html"><strong aria-hidden="true">13.2.</strong> Integration Using RESTful Resources</a></li><li class="chapter-item expanded "><a href="../chapter_13/chapter_13_2.html"><strong aria-hidden="true">13.3.</strong> Integration Using Messaging</a></li><li class="chapter-item expanded "><a href="../chapter_13/chapter_13_3.html"><strong aria-hidden="true">13.4.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../chapter_14/index.html"><strong aria-hidden="true">14.</strong> Chapter 14 Application</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_0.html"><strong aria-hidden="true">14.1.</strong> User Interface</a></li><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_1.html"><strong aria-hidden="true">14.2.</strong> Application Services</a></li><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_2.html"><strong aria-hidden="true">14.3.</strong> Composing Multiple Bounded Contexts</a></li><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_3.html"><strong aria-hidden="true">14.4.</strong> Infrastructure</a></li><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_4.html"><strong aria-hidden="true">14.5.</strong> Enterprise Component Containers</a></li><li class="chapter-item expanded "><a href="../chapter_14/chapter_14_5.html"><strong aria-hidden="true">14.6.</strong> Wrap-Up</a></li></ol></li><li class="chapter-item expanded "><a href="../appendix/index.html"><strong aria-hidden="true">15.</strong> Appendix A Aggregates and Event Sourcing: A+ES</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../appendix/appendix_0.html"><strong aria-hidden="true">15.1.</strong> Inside an Application Service</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_1.html"><strong aria-hidden="true">15.2.</strong> Command Handlers</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_2.html"><strong aria-hidden="true">15.3.</strong> Lambda Syntax</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_3.html"><strong aria-hidden="true">15.4.</strong> Concurrency Control</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_4.html"><strong aria-hidden="true">15.5.</strong> Structural Freedom with A+ES</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_5.html"><strong aria-hidden="true">15.6.</strong> Performance</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_6.html"><strong aria-hidden="true">15.7.</strong> Implementing an Event Store</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_7.html"><strong aria-hidden="true">15.8.</strong> Relational Persistence</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_8.html"><strong aria-hidden="true">15.9.</strong> BLOB Persistence</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_9.html"><strong aria-hidden="true">15.10.</strong> Focused Aggregates</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_10.html"><strong aria-hidden="true">15.11.</strong> Read Model Projections</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_11.html"><strong aria-hidden="true">15.12.</strong> Use with Aggregate Design</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_12.html"><strong aria-hidden="true">15.13.</strong> Events Enrichment</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_13.html"><strong aria-hidden="true">15.14.</strong> Supporting Tools and Patterns</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_14.html"><strong aria-hidden="true">15.15.</strong> Contract Generation</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_15.html"><strong aria-hidden="true">15.16.</strong> Unit Testing and Specifications</a></li><li class="chapter-item expanded "><a href="../appendix/appendix_16.html"><strong aria-hidden="true">15.17.</strong> Event Sourcing in Functional Languages</a></li></ol></li><li class="chapter-item expanded "><a href="../Bibliography.html"><strong aria-hidden="true">16.</strong> Bibliography</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">实现领域驱动设计</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="can-i-ddd"><a class="header" href="#can-i-ddd">Can I DDD</a></h1>
+<p>You can implement DDD if you have</p>
+<p>当满足下边这些条件时，你可以考虑实施DDD:</p>
+<ul>
+<li>A passion for creating excellent software every day, and the tenacity to achieve that goal<br />
+每天都有开发卓越软件的热情,以及实现这一目标的坚韧</li>
+<li>The eagerness to learn and improve, and the fortitude to admit you need to<br />
+对学习和改进的热切渴望,以及承认自己需要进步的勇气与毅力</li>
+<li>The aptitude to understand software patterns and how to properly apply them<br />
+理解软件设计模式及如何正确应用它们的能力</li>
+<li>The skill and patience to explore design alternatives using proven agile methods<br />
+运用经过验证的敏捷方法去探索和设计备选方案的技能和耐心</li>
+<li>The courage to challenge the status quo<br />
+勇于挑战现状</li>
+<li>The desire and ability to pay attention to details, to experiment and discover<br />
+注意细节、勇于实践和探索的欲望和能力</li>
+<li>A drive to seek ways to code smarter and better<br />
+有寻求提升代码质量的动力</li>
+</ul>
+<p>I’m not going to tell you that there isn’t a learning curve. To put it bluntly, the learning curve can be steep. Yet, this book has been put together to help flatten the curve as much as possible. My goal is to help you and your team implement DDD with the greatest potential for success.</p>
+<p>我不会告诉你领域驱动设计没有学习曲线。坦率地说，学习曲线可能会很陡峭。然而，这本书的编写旨在尽可能地降低学习曲线。我的目标是帮助你和你的团队在实施领域驱动设计时拥有最大的成功潜力。</p>
+<p>DDD isn’t first and foremost about technology. In its most central principles, DDD is about discussion, listening, understanding, discovery, and business value, all in an effort to centralize knowledge. If you are capable of <em>understanding the business</em> in which your company works, you can at a minimum participate in the software model discovery process to produce a <strong>Ubiquitous Language</strong>. Sure, you’re going to have to learn more about the business, lots more. Still, you are on your way to succeeding with DDD already because you can comprehend the concepts of your business, you revel in developing great software, and that gives you the proper footing to take DDD all the way.</p>
+<p>领域驱动设计首先并不是关于技术。在其最核心的原则中，领域驱动设计是关于讨论、倾听、理解、发现和业务价值，所有这些努力都是为了集中知识。如果你能够理解你的公司所在的业务，你至少可以参与软件模型发现过程，形成一种 <strong>&quot;通用语言&quot;（Ubiquitous Language）</strong> 。当然，你将不得不更多地了解业务，要了解很多。尽管如此，你已经走在成功实施领域驱动设计的道路上了，因为你能够理解你的业务概念，你乐于开发出色的软件，这为你全面采用领域驱动设计奠定了合适的基础。</p>
+<p>Won’t having years, even a decade or two, of software development experience help? It might. Nevertheless, software development experience doesn’t give you the ability to listen and learn from <em>domain experts</em>, the people who know the most about some high-priority area of the business. You are at a greater advantage if you can engage with those who seldom, if ever, express themselves using technical lingo. You’re going to have to listen and listen carefully. You’re going to have to respect their viewpoint and trust that they know a lot more than you do.</p>
+<p>拥有几年甚至十几年的软件开发经验会有所帮助吗？可能会有帮助。然而，软件开发经验并不能让你具备倾听和学习领域专家的能力，这些专家是对业务的某个高优先级领域了解最多的人。如果你能够与那些很少甚至从不使用技术术语表达自己的人进行交流，你就处于更大的优势。你将不得不倾听，而且要非常仔细地倾听。你需要尊重他们的观点，并相信他们比你知道更多</p>
+<blockquote>
+<p><strong>There Are Big Advantages to Engaging with Domain Experts</strong><br />
+You are at a greater advantage if you can engage with those who seldom, if ever, express themselves using technical lingo. Just as you are going to learn from them, there is a high probability that they are also going to learn from you.</p>
+</blockquote>
+<blockquote>
+<p><strong>与领域专家交流有很大的益处</strong><br />
+如果你能够与那些很少或从不使用技术术语表达自己的人进行交流，你就处于更大的优势。正如你将从他们那里学到东西一样，他们很可能也会从你那里学到东西。</p>
+</blockquote>
+<p>What you may like best about DDD is that the domain experts are also going to <em>have to listen to you</em>. You are on the team just as they are. As strange as it may seem, the domain experts don’t know everything about their business, and they are also going to learn more about it. Just as you are going to learn from them, there is a high probability that they are also going to learn from you. Your questions about what they know will most likely also uncover what they don’t know. You’ll be directly involved in helping everyone on the team discover a deeper understanding of the business, <em>even shaping the business</em>.</p>
+<p>你可能最喜欢领域驱动设计的地方在于，领域专家也将 <em>不得不倾听你的意见</em> 。你和他们一样都是团队的一部分。尽管看起来有点奇怪，领域专家并不了解他们业务的一切，他们也会学到更多。正如你将从他们那里学到东西一样，他们很可能也会从你这里学到东西。你对他们的提问很可能也会揭示他们不知道的事情。你将直接参与帮助团队中的每个人，使其对业务更加深入理解，甚至 <em>塑造业务</em> 。</p>
+<p>It’s great when a team learns and grows together. If you give it a chance, DDD makes that possible.</p>
+<p>当一个团队一起学习和成长时，那是非常棒的。如果你给它一个机会，领域驱动设计会让这成为可能。</p>
+<blockquote>
+<p><strong>But We Don’t <em>Have</em> Domain Experts</strong><br />
+A domain expert is not one by job title. These are the people who know the line of business you are working in really well. They probably have a lot of background in the business domain, and they might be product designers or even your salespeople. Look past the job title. The people you are looking for know more about what you are working on than anyone else, and for sure way more than you know. <em>Find them. Listen. Learn. Design in code.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>我们 <em>没有</em> 领域专家</strong><br />
+领域专家并不一定以职称来定义。他们是那些非常了解你所从事的业务的人。他们可能在业务领域有很多背景，他们可能是产品设计师，甚至是你们的销售人员。不要只看职称，你要找的人对你正在从事的工作了解得比其他任何人都要多，肯定比你知道的更多。找到他们：倾听、学习、用代码进行设计。</p>
+</blockquote>
+<p>So far we’re off to a pretty reassuring start. Still, I am also not going to tell you that technical ability isn’t important, that somehow you can get by without it. You will have to grasp some advanced software <em>domain modeling</em> concepts. Even so, it doesn’t necessarily mean you are going to be in over your head. If you have abilities somewhere between grasping <em>Head First Design Patterns</em> [Freeman et al.] and grokking the original <em>Design Patterns</em> [Gamma et al.] text, or even more advanced patterns, you stand a really good chance of succeeding with DDD. You can bank on this: I’m going to do everything I can to make that happen by lowering the bar, no matter what your level of experience.</p>
+<p>到目前为止，我们的开局相当令人放心。但是，我也不会告诉你技术能力不重要，或者你可以不依靠技术能力。你将不得不掌握一些高级软件领域建模的概念。即便如此，并不一定意味着你会一头雾水。如果你的能力介于掌握《Head First Design Patterns》[Freeman et al.]和理解原始的《Design Patterns》[Gamma et al.]，或者甚至更高级的模式之间，你成功实施领域驱动设计的机会就非常大。你可以信赖我：我会尽我所能降低门槛，让这一切发生，无论你的经验水平如何。</p>
+<blockquote>
+<p><strong>What’s a Domain Model?</strong><br />
+It’s a software model of the very specific business domain you are working in. Often it’s implemented as an object model, where those objects have both data and behavior with literal and accurate business meaning.<br />
+Creating a unique, carefully crafted domain model at the heart of a core, strategic application or subsystem is essential to practicing DDD. With DDD your domain models will tend to be smallish, very focused. Using DDD, you never try to model the whole business enterprise with a single, large domain model. Phew, that’s good!</p>
+</blockquote>
+<blockquote>
+<p><strong>什么是领域模型?</strong><br />
+一个领域模型是指你正在从事的非常具体的业务领域的软件模型。通常它被实现为一个对象模型，其中这些对象是具有文字描述和准确业务含义的数据和行为。 在核心、战略应用程序或子系统的核心创建一个独特、精心设计的领域模型对于实践领域驱动设计至关重要。在领域驱动设计中，你的领域模型往往会比较小，非常专注。使用领域驱动设计，你永远不会试图用单个大型领域模型来对整个企业进行建模。</p>
+</blockquote>
+<p>Consider the following perspectives of the people who can benefit from DDD. I know you fit in here somewhere:</p>
+<p>思考下边这些人（从DDD中收益）的观点。你肯定适合其中的某些：</p>
+<ul>
+<li>
+<p><strong><em>Newbie, junior developer</em>:</strong> “I’m young, with fresh ideas, I’ve got pentup energy to code, and I’m going to have an impact. What’s got me miffed is one of the projects I sprint on. I didn’t expect that my first gig off campus would mean shoveling data back and forth using lots of almost identical yet redundant ‘objects.’ Why is this architecture so complex if that’s all that’s happening? What’s up with <em>that</em>? The code breaks a lot when I try to change it. Does anyone actually understand what it’s supposed to do? Now there are some complex new features I have to add. I regularly slap an <em>adapter</em> around legacy classes to shield me from the goo. <em>No joy</em>. I’m sure there’s something I can do besides code and debug all day and night just to finish iterations. Whatever that is, I’m going to track it down and own it. I heard some of the others talking about DDD. <em>It sounds like Gang of Four, but tuned for the domain model.</em> Nice.”</p>
+<p><strong>初级开发人员：</strong><br />
+我年轻，有新鲜的想法，我有充沛的精力去编程，我要产生影响。让我感到困惑的是我参与的一个项目：我没有预料到我校外的第一个工作会是来回传输大量几乎相同且冗余的‘对象’。如果只是这样的话，为什么这个架构如此复杂？这到底是怎么回事？当我试图更改代码时，代码经常会出现问题。有人真的理解它应该做什么吗？当有一些复杂的新功能我需要添加时，我经常在旧的类周围加一个适配器，以保护自己免受混乱的影响。这让我提不起兴趣，我确定除了整天整夜地编码和调试以完成迭代之外，还有其他事情我可以去做。不管那是什么，我都会找到并掌握它。当我听到其他人谈论领域驱动设计时，听起来像是《设计模式》一样，但是针对领域模型进行了调整，听起来很不错。</p>
+<p>Gotcha covered.</p>
+</li>
+<li>
+<p><strong><em>Midlevel developer</em> :</strong> “Over the past few months I’ve been included on the new system. It’s my turn to make a difference. I get it, but what I’m missing are profound insights when I’m meeting with the senior developers. Sometimes things seem whacked, but I’m not sure why. I’m going to help change the way things are done around here. I know that throwing technology at a problem only takes you so far, and that’s basically not far enough. What I need is <em>a sound software development technique</em> that’s going to help me become a wise and experienced software practitioner. One of the senior architects, the new guy, made a pitch for something called DDD. I’m listening.”</p>
+<p><strong>中级开发人员：</strong><br />
+在过去几个月里，我进入了一个新的团队。现在轮到我做出改变了。我明白了，但我缺少的是在与高级开发人员沟通时的深刻见解。有时事情看起来有点混乱，但我不确定原因，我要帮助这里改变工作方式。我知道仅仅通过技术解决问题是远远不够的。我需要的是一种 <strong>可靠的软件开发技术</strong> ，它将帮助我成为一名睿智且经验丰富的软件从业者。新来了一位资深架构师，正在为一种叫做DDD的东西进行宣传。我在听着。</p>
+<p>You’re sounding senior already. Read on. Your forward-thinking attitude will be rewarded.</p>
+<p>你听起来已经很资深了。继续读下去，你的前瞻性思维会得到提升。</p>
+</li>
+<li>
+<p><strong><em>Senior developer, architect</em> :</strong> “I’ve used DDD on a few projects, but not since landing this new position. I like the power of the <em>tactical patterns</em>, but there’s a lot more I could apply, with <em>strategic design</em> being one. What I found most insightful when reading [Evans] was the Ubiquitous Language. <em>That’s powerful stuff</em>. I’ve had discussions with a number of my teammates and management, trying to influence DDD’s adoption here. One of the new kids and a few of the midlevel and senior members are jazzed about the prospects. Management isn’t so excited. I recently joined this company, and although I was brought in to lead, it seems that the organization is less interested in disruptive advancements than I thought. Whatever. I’m not giving up. With other developers psyched about it, <em>I know we can make it happen</em>. The payoffs are going to be much greater than anticipated. We’ll draw the pure business people—the domain experts—closer to our technical teams, and <em>we’ll actually invest in our solutions</em>, not just grunt them out iteration after iteration.”</p>
+<p><strong>高级开发者，架构师：</strong><br />
+“我在一些项目上使用过DDD，但自从来到这个新职位以后就没有用过。我喜欢战术设计模式的强大功能，但我可以应用的还有很多，战略设计模式就是其中之一。当我阅读[Evans]的时候，我发现最有见地的是 <strong>通用语言（Ubiquitous Language）</strong> 。那是非常有力的东西,我与许多团队成员和管理层进行了讨论，试图影响公司采用DDD。一些新人和一些中级和资深开发者对前景感到兴奋。管理层并不那么激动。我最近加入了这家公司，尽管是我主导项目开发，但似乎组织对颠覆性进步的兴趣不如我想象的那么大。不管怎样，我不会放弃。有其他开发人员对此感到兴奋，我知道我们可以做到。回报将会比预期的要大得多。我们将吸引纯粹的业务人员——领域专家——靠近我们的技术团队，我们将<em>真正投入于我们的解决方案</em>，而不仅仅是一次次地完成它们。”</p>
+<p>Now <em>that’s</em> what a leader does. This book has lots of guidance that shows how to succeed with <em>strategic design</em>.</p>
+<p>这就是领导者该做的。这本书有很多关于如何通过“战略设计”获得成功的指导。</p>
+</li>
+<li>
+<p><strong><em>Domain expert</em> :</strong> “I’ve been involved in specifying the IT solutions to our business challenges for a long time now. Maybe it’s too much to expect, but I wish the developers understood better what we do here. They’re always talking down to us like we’re stupid. What they don’t understand is, if it wasn’t for us there wouldn’t be jobs here for them to mess around with computers. The developers always have some strange way of talking about what our software does. If we talk about A, they say it’s really called B. <em>It’s like we have to have some sort of dictionary and road map on hand every time we try to communicate what we need</em>. If we don’t let them have their way by calling B what we know is A, they don’t cooperate. We waste so much time in this mode. <em>Why can’t the software just work the way the real experts think about the business?</em>”</p>
+<p><strong>领域专家：</strong><br />
+很长一段时间以来，我一直在为我们的业务挑战指定IT解决方案。也许期望过高了，但我希望开发人员能更好地理解我们在这里做些什么。他们总是对我们说话时态度高傲，好像我们很愚蠢。他们不明白的是，如果不是我们，这里就不会有工作让他们去玩弄电脑。开发人员总是以一种奇怪的方式谈论我们的软件。如果我们谈论A，他们说实际上应该叫B。好像我们每次尝试传达我们的需求时都必须随身携带某种字典和路线图。如果我们不按照他们的方式称呼B，而坚持认为它是A，他们就不合作。我们在这种模式下浪费了很多时间。为什么软件不能按照真正的专家对业务的想法来工作呢？</p>
+<p>You’ve got that right. One of the biggest problems is the false need for translation between business people and techies. This chapter is for you. As you’re going to see, <em>DDD puts you and developers on level ground</em>.</p>
+<p>这一点说得对。最大的问题之一是业务人员和技术人员之间虚假的翻译需求。这一章是为您而设的。正如您将会看到的，领域驱动设计将您和开发人员置于同一水平。</p>
+<p>And, surprise! You’ve got some developers already leaning your way. Help them here.<br />
+看来您已经有一些开发人员倾向于支持您的方向。在这方面给他们提供帮助。</p>
+</li>
+<li>
+<p><strong><em>Manager</em> :</strong> “We are shipping software. It’s not always with the greatest result, and changes seem to take longer than they should. The developers keep talking about some domain something-or-another. I’m not sure we need to get high centered on yet another technique or methodology, like it’s some kind of silver bullet. I’ve heard all that a thousand times before. We try, the fad dies, and we are right back to the same-old same-old. I keep saying that we need to stay the course and stop dreaming, but the team keeps hounding me. They’ve worked hard, so I owe them a listen. <em>They are smart people and they all deserve a chance to improve things</em> before they get torqued and move on. I could allow them some time to learn and adjust if I can get backing from upper management. I think I could get that approval if I can convince my boss of the team’s claims of <em>achieving critical software investment and a centralization of business knowledge</em> . Truth is, it will make my job easier if <em>I can do something to inspire trust and cooperation between my teams and business experts</em>. Anyway, that’s what I am hearing I can do.”</p>
+<p><strong>管理者：</strong><br />
+&quot;我们正在交付软件。结果并不总是很好,修改似乎也花费了比预期长得多的时间。开发人员一直在讨论一些领域怎么怎么设计。我不确定我们是否需要高度集中注意力在又一个技术或方法论上,就像它是某种灵丹妙药一样。我以前听过成千上万次类似的话。我们尝试了,热门技术过去了,我们又回到了原来的状态。我一直在说,我们需要坚持原来的工作,停止患得患失,但团队一直在催我。他们工作很努力,所以我必须听他们说明情况。<em>他们都是聪明人，在他们离职之前，他们都应该得到改进事情的机会</em>。如果我能获得上级管理层的支持,我也许可以给他们一些时间去学习和调整。我认为如果我能向老板解释团队声称可以<em>实现关键软件投资和将业务知识集中起来</em>,他可能会同意。实际上,如果我<em>能做些什么来促进团队与业务专家之间的信任与合作</em>,也将更方便我的工作。总之,这就是我听说可以做的事情。&quot;</p>
+<p>Good manager!</p>
+</li>
+</ul>
+<p>Whoever you are, here’s an important heads-up. To succeed with DDD <em>you are going to have to learn something</em>, and actually a lot of somethings. That shouldn’t be a big deal, though. You are smart and you have to learn all the time. Yet we all face this challenge:</p>
+<p>对于领域驱动设计要成功，你将不得不学习一些东西，实际上是很多东西。这应该不是一个大问题，因为你很聪明，而且你一直在学习。然而，我们都面临这个挑战：</p>
+<p>Personally I’m always ready to learn, although I do not always like being taught.<br />
+我个人总是乐意学习,尽管不是总喜欢受教。<br />
+     — Sir Winston Churchill</p>
+<p>That’s where this book comes in. I’ve tried to make the teaching as pleasant as possible while delivering the vital understanding you need to implement DDD with success.</p>
+<p>这就是这本书的作用所在。我尽量让教学过程尽可能愉快，同时传授你实施DDD (领域驱动设计) 所需的重要理解，以获得成功。</p>
+<p>Your question, though, is: “Why should I do DDD?” That’s fair.</p>
+<p>你的问题是：“我为什么要实施领域驱动设计呢？”这是个合理的问题。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../chapter_1/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../chapter_1/chapter_1_2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../chapter_1/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../chapter_1/chapter_1_2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
