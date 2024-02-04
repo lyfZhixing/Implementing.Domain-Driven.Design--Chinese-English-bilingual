@@ -58,13 +58,19 @@ Worse still is when the technical approach to software development actually wron
 
 更糟糕的是，软件开发的技术方法实际上错误地改变了企业的运作方式。虽然情况不同，但众所周知，企业资源规划（ERP）软件往往会改变组织的整体业务运作，以适应ERP的运作方式。拥有ERP系统的总成本不能完全以许可证和维护费用来计算。业务重组和中断的成本可能远远超过这两个有形因素。当软件开发团队将业务需求转化为新开发软件的实际功能时，也会发生类似的动态变化。这对企业、其客户和合作伙伴来说既昂贵又具有破坏性。 此外，通过使用成熟的软件开发技术，这种技术解释是不必要的，也是可以避免的。解决方案是一项关键投资。
 
-## How DDD Helps   
+## How DDD Helps（DDD的作用）   
 
-DDD is an approach to developing software that focuses on these three primary aspects:
+DDD is an approach to developing software that focuses on these three primary aspects:   
 
-1. DDD brings domain experts and software developers together in order to develop software that reflects the mental model of the business experts. This does not mean that effort is spent on modeling the “real world.” Rather, DDD delivers a model that is the most useful to the business. Sometimes useful and realistic models happen to intersect, but to the degree that they diverge, DDD chooses useful.
+领域驱动设计(DDD)是一种软件开发方法,着重以下三个主要方面:
 
-    With this aspect the efforts of domain experts and software developers are devoted to jointly developing a Ubiquitous Language of the areas of the business that they are focused on modeling. The Ubiquitous Language is developed with full team agreement, is spoken, and is directly captured in the model of the software. It is worth reiterating that the team is composed of both domain experts and software developers. It’s never “us and them.” It’s always *us. *This is a key business value that allows business know-how to outlive the relatively short initial development efforts that deliver the first few versions of the software, and the teams that produce it. It’s the point where the cost of developing software is a justifiable business investment, not just a cost center.
+1. DDD brings domain experts and software developers together in order to develop software that reflects the mental model of the business experts. This does not mean that effort is spent on modeling the “real world.” Rather, DDD delivers a model that is the most useful to the business. Sometimes useful and realistic models happen to intersect, but to the degree that they diverge, DDD chooses useful.    
+
+    通过DDD,可以把业务领域专家和软件开发人员汇聚在一起,共同开发出可以反映业务专家心智模型（__mental model__）的软件。这不意味着会花时间建立“现实世界”的模型。相反,DDD会构建对业务最有用的模型。有时有用的模型和现实模型可能重合,但如果两者存在分歧,DDD会选择更有用的模型。DDD关注的不是现实世界本身,而是业务需要。它通过软件实现业务专家共享的 __mental model__,从而更好地支持业务需求变更。
+
+    With this aspect the efforts of domain experts and software developers are devoted to jointly developing a Ubiquitous Language of the areas of the business that they are focused on modeling. The Ubiquitous Language is developed with full team agreement, is spoken, and is directly captured in the model of the software. It is worth reiterating that the team is composed of both domain experts and software developers. It’s never “us and them.” It’s always *us. *This is a key business value that allows business know-how to outlive the relatively short initial development efforts that deliver the first few versions of the software, and the teams that produce it. It’s the point where the cost of developing software is a justifiable business investment, not just a cost center.    
+
+        通过这一点,业务领域专家和软件开发人员都致力于共同开发需要着手建模的业务领域的 __通用语言__ 。通用语言是在全体团队一致同意下制定的,用于日常交流,并直接记录在软件模型中。需要强调的是,团队成员包括业务领域专家和软件开发人员。他们不是“我们和他们”,而是“我们”。这是一个关键的业务价值,可以使业务知识超越最初开发软件的相对较短发展阶段和相应团队,延续下去。也就是说,开发软件不再仅仅是成本中心,而成为可以被批准的合理业务投资。通过通用语言的使用,软件可以真正映射和支持业务规则和业务变更需求,同时将业务知识深入维护和应用在软件体内,这就是DDD的关键业务价值所在。
 
     This entire effort unifies domain experts who initially disagree with each other, or who simply lack core knowledge of the domain. Further, it strengthens the close-knit team by spreading deep domain insight among all team members, including software developers. Consider this the hands-on training that every company should invest in its knowledge workers.
 
