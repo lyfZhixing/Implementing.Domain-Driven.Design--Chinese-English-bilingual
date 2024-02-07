@@ -1,0 +1,4 @@
+# 跨系统边界交换信息 
+
+<div align = "center"><img src = "images/000116.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-486"></a><img src="images/000143.jpg" alt="Image 444" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-487"></a><img src="images/000170.jpg" alt="Image 445" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-488"></a><img src="images/000198.jpg" alt="Image 446" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-489"></a><img src="images/000225.jpg" alt="Image 447" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-490"></a><img src="images/000252.jpg" alt="Image 448" class="calibre2" /></p>    

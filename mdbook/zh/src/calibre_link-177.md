@@ -1,0 +1,4 @@
+# 从Scrum的产品负责人和团队成员处得到持续通知 
+
+<div align = "center"><img src = "images/000029.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-499"></a><img src="images/000081.jpg" alt="Image 461" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-500"></a><img src="images/000109.jpg" alt="Image 462" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-501"></a><img src="images/000136.jpg" alt="Image 463" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-502"></a><img src="images/000163.jpg" alt="Image 464" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-503"></a><img src="images/000191.jpg" alt="Image 465" class="calibre2" /></p>    

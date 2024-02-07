@@ -1,0 +1,759 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>实现领域驱动设计</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="calibre_link-1.html"><strong aria-hidden="true">1.</strong> 封面</a></li><li class="chapter-item expanded "><a href="calibre_link-4.html"><strong aria-hidden="true">2.</strong> 前言</a></li><li class="chapter-item expanded "><a href="calibre_link-6.html"><strong aria-hidden="true">3.</strong> 第1章 DDD入门 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-7.html"><strong aria-hidden="true">3.1.</strong> 我能DDD吗？ </a></li><li class="chapter-item expanded "><a href="calibre_link-8.html"><strong aria-hidden="true">3.2.</strong> 为什么我们需要DDD </a></li><li class="chapter-item expanded "><a href="calibre_link-9.html"><strong aria-hidden="true">3.3.</strong> 如何DDD </a></li><li class="chapter-item expanded "><a href="calibre_link-10.html"><strong aria-hidden="true">3.4.</strong> 使用DDD的业务价值 </a></li><li class="chapter-item expanded "><a href="calibre_link-13.html"><strong aria-hidden="true">3.5.</strong> 实施DDD所面临的挑战</a></li><li class="chapter-item expanded "><a href="calibre_link-14.html"><strong aria-hidden="true">3.6.</strong> 虚构的案例，真实的实践 </a></li><li class="chapter-item expanded "><a href="calibre_link-15.html"><strong aria-hidden="true">3.7.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-16.html"><strong aria-hidden="true">4.</strong> 第2章 领域、子域和限界上下文 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-16.html"><strong aria-hidden="true">4.1.</strong> 总览 </a></li><li class="chapter-item expanded "><a href="calibre_link-17.html"><strong aria-hidden="true">4.2.</strong> 工作中的子域和限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-18.html"><strong aria-hidden="true">4.3.</strong> 将关注点放在核心域上 </a></li><li class="chapter-item expanded "><a href="calibre_link-19.html"><strong aria-hidden="true">4.4.</strong> 战略设计为什么重要 </a></li><li class="chapter-item expanded "><a href="calibre_link-20.html"><strong aria-hidden="true">4.5.</strong> 现实世界中领域和子域 </a></li><li class="chapter-item expanded "><a href="calibre_link-21.html"><strong aria-hidden="true">4.6.</strong> 理解限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-22.html"><strong aria-hidden="true">4.7.</strong> 限界上下文不仅仅只包含模型 </a></li><li class="chapter-item expanded "><a href="calibre_link-23.html"><strong aria-hidden="true">4.8.</strong> 限界上下文的大小 </a></li><li class="chapter-item expanded "><a href="calibre_link-24.html"><strong aria-hidden="true">4.9.</strong> 与技术组件保持一致 </a></li><li class="chapter-item expanded "><a href="calibre_link-25.html"><strong aria-hidden="true">4.10.</strong> 示例上下文</a></li><li class="chapter-item expanded "><a href="calibre_link-26.html"><strong aria-hidden="true">4.11.</strong> 协作上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-27.html"><strong aria-hidden="true">4.12.</strong> 身份与访问上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-28.html"><strong aria-hidden="true">4.13.</strong> 敏捷项目管理上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-29.html"><strong aria-hidden="true">4.14.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-30.html"><strong aria-hidden="true">5.</strong> 第3章 上下文映射图 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-30.html"><strong aria-hidden="true">5.1.</strong> 上下文映射图为什么重要 </a></li><li class="chapter-item expanded "><a href="calibre_link-31.html"><strong aria-hidden="true">5.2.</strong> 绘制上下文映射图 </a></li><li class="chapter-item expanded "><a href="calibre_link-32.html"><strong aria-hidden="true">5.3.</strong> 产品和组织关系 </a></li><li class="chapter-item expanded "><a href="calibre_link-33.html"><strong aria-hidden="true">5.4.</strong> 映射3个示例限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-34.html"><strong aria-hidden="true">5.5.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-35.html"><strong aria-hidden="true">6.</strong> 第4章 架构 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-36.html"><strong aria-hidden="true">6.1.</strong> 采访一个成功的CIO</a></li><li class="chapter-item expanded "><a href="calibre_link-37.html"><strong aria-hidden="true">6.2.</strong> 分层 </a></li><li class="chapter-item expanded "><a href="calibre_link-38.html"><strong aria-hidden="true">6.3.</strong> 依赖倒置原则 </a></li><li class="chapter-item expanded "><a href="calibre_link-39.html"><strong aria-hidden="true">6.4.</strong> 六边形架构（端口与适配器） </a></li><li class="chapter-item expanded "><a href="calibre_link-40.html"><strong aria-hidden="true">6.5.</strong> 面向服务架构 </a></li><li class="chapter-item expanded "><a href="calibre_link-41.html"><strong aria-hidden="true">6.6.</strong> REST </a></li><li class="chapter-item expanded "><a href="calibre_link-41.html"><strong aria-hidden="true">6.7.</strong> REST作为一种架构风格 </a></li><li class="chapter-item expanded "><a href="calibre_link-42.html"><strong aria-hidden="true">6.8.</strong> RESTful HTTP服务器的关键方面 </a></li><li class="chapter-item expanded "><a href="calibre_link-43.html"><strong aria-hidden="true">6.9.</strong> RESTful HTTP客户端的关键方面 </a></li><li class="chapter-item expanded "><a href="calibre_link-44.html"><strong aria-hidden="true">6.10.</strong> REST和DDD </a></li><li class="chapter-item expanded "><a href="calibre_link-45.html"><strong aria-hidden="true">6.11.</strong> 为什么是REST？ </a></li><li class="chapter-item expanded "><a href="calibre_link-45.html"><strong aria-hidden="true">6.12.</strong> 命令和查询职责分离——CQRS</a></li><li class="chapter-item expanded "><a href="calibre_link-46.html"><strong aria-hidden="true">6.13.</strong> CQRS的各个方面 </a></li><li class="chapter-item expanded "><a href="calibre_link-47.html"><strong aria-hidden="true">6.14.</strong> 处理具有最终一致性的查询模型 </a></li><li class="chapter-item expanded "><a href="calibre_link-48.html"><strong aria-hidden="true">6.15.</strong> 事件驱动架构 </a></li><li class="chapter-item expanded "><a href="calibre_link-49.html"><strong aria-hidden="true">6.16.</strong> 管道和过滤器 </a></li><li class="chapter-item expanded "><a href="calibre_link-50.html"><strong aria-hidden="true">6.17.</strong> 长时处理过程（也叫Saga） </a></li><li class="chapter-item expanded "><a href="calibre_link-51.html"><strong aria-hidden="true">6.18.</strong> 事件源 </a></li><li class="chapter-item expanded "><a href="calibre_link-52.html"><strong aria-hidden="true">6.19.</strong> 数据网织和基于网格的分布式计算 </a></li><li class="chapter-item expanded "><a href="calibre_link-53.html"><strong aria-hidden="true">6.20.</strong> 数据复制 </a></li><li class="chapter-item expanded "><a href="calibre_link-54.html"><strong aria-hidden="true">6.21.</strong> 事件驱动网织和领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-54.html"><strong aria-hidden="true">6.22.</strong> 持续查询 </a></li><li class="chapter-item expanded "><a href="calibre_link-55.html"><strong aria-hidden="true">6.23.</strong> 分布式处理 </a></li><li class="chapter-item expanded "><a href="calibre_link-56.html"><strong aria-hidden="true">6.24.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-57.html"><strong aria-hidden="true">7.</strong> 第5章 实体 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-57.html"><strong aria-hidden="true">7.1.</strong> 为什么使用实体 </a></li><li class="chapter-item expanded "><a href="calibre_link-58.html"><strong aria-hidden="true">7.2.</strong> 唯一标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-59.html"><strong aria-hidden="true">7.3.</strong> 用户提供唯一标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-60.html"><strong aria-hidden="true">7.4.</strong> 应用程序生成唯一标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-61.html"><strong aria-hidden="true">7.5.</strong> 持久化机制生成唯一标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-62.html"><strong aria-hidden="true">7.6.</strong> 另一个限界上下文提供唯一标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-63.html"><strong aria-hidden="true">7.7.</strong> 标识生成时间 </a></li><li class="chapter-item expanded "><a href="calibre_link-64.html"><strong aria-hidden="true">7.8.</strong> 委派标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-65.html"><strong aria-hidden="true">7.9.</strong> 标识稳定性 </a></li><li class="chapter-item expanded "><a href="calibre_link-66.html"><strong aria-hidden="true">7.10.</strong> 发现实体及其本质特征 </a></li><li class="chapter-item expanded "><a href="calibre_link-67.html"><strong aria-hidden="true">7.11.</strong> 揭开实体及其本质特征的神秘面纱 </a></li><li class="chapter-item expanded "><a href="calibre_link-68.html"><strong aria-hidden="true">7.12.</strong> 挖掘实体的关键行为 </a></li><li class="chapter-item expanded "><a href="calibre_link-69.html"><strong aria-hidden="true">7.13.</strong> 角色和职责 </a></li><li class="chapter-item expanded "><a href="calibre_link-70.html"><strong aria-hidden="true">7.14.</strong> 创建实体 </a></li><li class="chapter-item expanded "><a href="calibre_link-71.html"><strong aria-hidden="true">7.15.</strong> 验证 </a></li><li class="chapter-item expanded "><a href="calibre_link-72.html"><strong aria-hidden="true">7.16.</strong> 跟踪变化 </a></li><li class="chapter-item expanded "><a href="calibre_link-72.html"><strong aria-hidden="true">7.17.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-73.html"><strong aria-hidden="true">8.</strong> 第6章 值对象 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-74.html"><strong aria-hidden="true">8.1.</strong> 值对象的特征 </a></li><li class="chapter-item expanded "><a href="calibre_link-75.html"><strong aria-hidden="true">8.2.</strong> 度量或描述 </a></li><li class="chapter-item expanded "><a href="calibre_link-75.html"><strong aria-hidden="true">8.3.</strong> 不变性 </a></li><li class="chapter-item expanded "><a href="calibre_link-76.html"><strong aria-hidden="true">8.4.</strong> 概念整体 </a></li><li class="chapter-item expanded "><a href="calibre_link-77.html"><strong aria-hidden="true">8.5.</strong> 可替换性 </a></li><li class="chapter-item expanded "><a href="calibre_link-78.html"><strong aria-hidden="true">8.6.</strong> 值对象相等性 </a></li><li class="chapter-item expanded "><a href="calibre_link-79.html"><strong aria-hidden="true">8.7.</strong> 无副作用行为 </a></li><li class="chapter-item expanded "><a href="calibre_link-80.html"><strong aria-hidden="true">8.8.</strong> 最小化集成 </a></li><li class="chapter-item expanded "><a href="calibre_link-81.html"><strong aria-hidden="true">8.9.</strong> 用值对象表示标准类型 </a></li><li class="chapter-item expanded "><a href="calibre_link-82.html"><strong aria-hidden="true">8.10.</strong> 测试值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-83.html"><strong aria-hidden="true">8.11.</strong> 实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-84.html"><strong aria-hidden="true">8.12.</strong> 持久化值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-85.html"><strong aria-hidden="true">8.13.</strong> 拒绝由数据建模泄漏带来的不利影响 </a></li><li class="chapter-item expanded "><a href="calibre_link-86.html"><strong aria-hidden="true">8.14.</strong> ORM与单个值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-87.html"><strong aria-hidden="true">8.15.</strong> 多个值对象序列化到单个列中 </a></li><li class="chapter-item expanded "><a href="calibre_link-88.html"><strong aria-hidden="true">8.16.</strong> 使用数据库实体保存多个值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-89.html"><strong aria-hidden="true">8.17.</strong> 使用联合表保存多个值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-90.html"><strong aria-hidden="true">8.18.</strong> ORM与枚举状态对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-91.html"><strong aria-hidden="true">8.19.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-92.html"><strong aria-hidden="true">9.</strong> 第7章 领域服务 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-93.html"><strong aria-hidden="true">9.1.</strong> 什么是领域服务（首先，什么不是领域服务） </a></li><li class="chapter-item expanded "><a href="calibre_link-94.html"><strong aria-hidden="true">9.2.</strong> 请确定你是否需要一个领域服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-95.html"><strong aria-hidden="true">9.3.</strong> 建模领域服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-96.html"><strong aria-hidden="true">9.4.</strong> 独立接口有必要吗 </a></li><li class="chapter-item expanded "><a href="calibre_link-1.html"><strong aria-hidden="true">9.5.</strong> 一个计算过程 </a></li><li class="chapter-item expanded "><a href="calibre_link-97.html"><strong aria-hidden="true">9.6.</strong> 转换服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-98.html"><strong aria-hidden="true">9.7.</strong> 为领域服务创建一个迷你层 </a></li><li class="chapter-item expanded "><a href="calibre_link-98.html"><strong aria-hidden="true">9.8.</strong> 测试领域服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-99.html"><strong aria-hidden="true">9.9.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-100.html"><strong aria-hidden="true">10.</strong> 第8章 领域事件 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-100.html"><strong aria-hidden="true">10.1.</strong> 何时/为什么使用领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-101.html"><strong aria-hidden="true">10.2.</strong> 建模领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-102.html"><strong aria-hidden="true">10.3.</strong> 创建具有聚合特征的领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-103.html"><strong aria-hidden="true">10.4.</strong> 身份标识 </a></li><li class="chapter-item expanded "><a href="calibre_link-104.html"><strong aria-hidden="true">10.5.</strong> 从领域模型中发布领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-104.html"><strong aria-hidden="true">10.6.</strong> 发送方 </a></li><li class="chapter-item expanded "><a href="calibre_link-105.html"><strong aria-hidden="true">10.7.</strong> 订阅方 </a></li><li class="chapter-item expanded "><a href="calibre_link-106.html"><strong aria-hidden="true">10.8.</strong> 向远程限界上下文发布领域事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-106.html"><strong aria-hidden="true">10.9.</strong> 消息设施的一致性 </a></li><li class="chapter-item expanded "><a href="calibre_link-107.html"><strong aria-hidden="true">10.10.</strong> 自治服务和系统 </a></li><li class="chapter-item expanded "><a href="calibre_link-108.html"><strong aria-hidden="true">10.11.</strong> 容许时延 </a></li><li class="chapter-item expanded "><a href="calibre_link-109.html"><strong aria-hidden="true">10.12.</strong> 事件存储 </a></li><li class="chapter-item expanded "><a href="calibre_link-110.html"><strong aria-hidden="true">10.13.</strong> 转发存储事件的架构风格 </a></li><li class="chapter-item expanded "><a href="calibre_link-110.html"><strong aria-hidden="true">10.14.</strong> 以REST资源的方式发布事件通知 </a></li><li class="chapter-item expanded "><a href="calibre_link-111.html"><strong aria-hidden="true">10.15.</strong> 通过消息中间件发布事件通知 </a></li><li class="chapter-item expanded "><a href="calibre_link-112.html"><strong aria-hidden="true">10.16.</strong> 实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-113.html"><strong aria-hidden="true">10.17.</strong> 发布NotificationLog </a></li><li class="chapter-item expanded "><a href="calibre_link-114.html"><strong aria-hidden="true">10.18.</strong> 发布基于消息的事件通知 </a></li><li class="chapter-item expanded "><a href="calibre_link-115.html"><strong aria-hidden="true">10.19.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-116.html"><strong aria-hidden="true">11.</strong> 第9章 模块 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-116.html"><strong aria-hidden="true">11.1.</strong> 通过模块完成设计 </a></li><li class="chapter-item expanded "><a href="calibre_link-117.html"><strong aria-hidden="true">11.2.</strong> 模块的基本命名规范 </a></li><li class="chapter-item expanded "><a href="calibre_link-117.html"><strong aria-hidden="true">11.3.</strong> 领域模型的命名规范 </a></li><li class="chapter-item expanded "><a href="calibre_link-118.html"><strong aria-hidden="true">11.4.</strong> 敏捷项目管理上下文中的模块 </a></li><li class="chapter-item expanded "><a href="calibre_link-119.html"><strong aria-hidden="true">11.5.</strong> 其他层中的模块 </a></li><li class="chapter-item expanded "><a href="calibre_link-120.html"><strong aria-hidden="true">11.6.</strong> 先考虑模块，再是限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-121.html"><strong aria-hidden="true">11.7.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-122.html"><strong aria-hidden="true">12.</strong> 第10章 聚合 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-123.html"><strong aria-hidden="true">12.1.</strong> 在Scrum核心领域中使用聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-124.html"><strong aria-hidden="true">12.2.</strong> 第一次尝试：臃肿的聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-125.html"><strong aria-hidden="true">12.3.</strong> 第二次尝试：多个聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-126.html"><strong aria-hidden="true">12.4.</strong> 原则：在一致性边界之内建模真正的不变条件 </a></li><li class="chapter-item expanded "><a href="calibre_link-127.html"><strong aria-hidden="true">12.5.</strong> 原则：设计小聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-128.html"><strong aria-hidden="true">12.6.</strong> 不要相信每一个用例 </a></li><li class="chapter-item expanded "><a href="calibre_link-129.html"><strong aria-hidden="true">12.7.</strong> 原则：通过唯一标识引用其他聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-130.html"><strong aria-hidden="true">12.8.</strong> 通过标识引用使多个聚合协同工作 </a></li><li class="chapter-item expanded "><a href="calibre_link-131.html"><strong aria-hidden="true">12.9.</strong> 建模对象导航性 </a></li><li class="chapter-item expanded "><a href="calibre_link-132.html"><strong aria-hidden="true">12.10.</strong> 可伸缩性和分布式 </a></li><li class="chapter-item expanded "><a href="calibre_link-133.html"><strong aria-hidden="true">12.11.</strong> 原则：在边界之外使用最终一致性 </a></li><li class="chapter-item expanded "><a href="calibre_link-134.html"><strong aria-hidden="true">12.12.</strong> 谁的任务？ </a></li><li class="chapter-item expanded "><a href="calibre_link-135.html"><strong aria-hidden="true">12.13.</strong> 打破原则的理由 </a></li><li class="chapter-item expanded "><a href="calibre_link-138.html"><strong aria-hidden="true">12.14.</strong> 遵循原则 </a></li><li class="chapter-item expanded "><a href="calibre_link-139.html"><strong aria-hidden="true">12.15.</strong> 估算聚合成本 </a></li><li class="chapter-item expanded "><a href="calibre_link-140.html"><strong aria-hidden="true">12.16.</strong> 常见用例场景 </a></li><li class="chapter-item expanded "><a href="calibre_link-141.html"><strong aria-hidden="true">12.17.</strong> 内存消耗 </a></li><li class="chapter-item expanded "><a href="calibre_link-142.html"><strong aria-hidden="true">12.18.</strong> 探索另外的设计 </a></li><li class="chapter-item expanded "><a href="calibre_link-143.html"><strong aria-hidden="true">12.19.</strong> 实现最终一致性 </a></li><li class="chapter-item expanded "><a href="calibre_link-144.html"><strong aria-hidden="true">12.20.</strong> 这是Scrum团队成员的任务吗？ </a></li><li class="chapter-item expanded "><a href="calibre_link-145.html"><strong aria-hidden="true">12.21.</strong> 决定的时候到了 </a></li><li class="chapter-item expanded "><a href="calibre_link-146.html"><strong aria-hidden="true">12.22.</strong> 创建具有唯一标识的根实体</a></li><li class="chapter-item expanded "><a href="calibre_link-147.html"><strong aria-hidden="true">12.23.</strong> 优先使用值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-148.html"><strong aria-hidden="true">12.24.</strong> 使用迪米特法则和“告诉而非询问”原则 </a></li><li class="chapter-item expanded "><a href="calibre_link-149.html"><strong aria-hidden="true">12.25.</strong> 乐观并发 </a></li><li class="chapter-item expanded "><a href="calibre_link-150.html"><strong aria-hidden="true">12.26.</strong> 避免依赖注入 </a></li><li class="chapter-item expanded "><a href="calibre_link-151.html"><strong aria-hidden="true">12.27.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-152.html"><strong aria-hidden="true">13.</strong> 第11章 工厂 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-152.html"><strong aria-hidden="true">13.1.</strong> 领域模型中的工厂 </a></li><li class="chapter-item expanded "><a href="calibre_link-153.html"><strong aria-hidden="true">13.2.</strong> 聚合根中的工厂方法 </a></li><li class="chapter-item expanded "><a href="calibre_link-154.html"><strong aria-hidden="true">13.3.</strong> 创建CalendarEntry实例 </a></li><li class="chapter-item expanded "><a href="calibre_link-155.html"><strong aria-hidden="true">13.4.</strong> 创建Discussion实例 </a></li><li class="chapter-item expanded "><a href="calibre_link-156.html"><strong aria-hidden="true">13.5.</strong> 领域服务中的工厂 </a></li><li class="chapter-item expanded "><a href="calibre_link-157.html"><strong aria-hidden="true">13.6.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-158.html"><strong aria-hidden="true">14.</strong> 第12章 资源库 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-159.html"><strong aria-hidden="true">14.1.</strong> 面向集合资源库 </a></li><li class="chapter-item expanded "><a href="calibre_link-160.html"><strong aria-hidden="true">14.2.</strong> Hibernate实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-161.html"><strong aria-hidden="true">14.3.</strong> TopLink实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-162.html"><strong aria-hidden="true">14.4.</strong> 面向持久化资源库 </a></li><li class="chapter-item expanded "><a href="calibre_link-163.html"><strong aria-hidden="true">14.5.</strong> Coherence实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-164.html"><strong aria-hidden="true">14.6.</strong> MongoDB实现 </a></li><li class="chapter-item expanded "><a href="calibre_link-165.html"><strong aria-hidden="true">14.7.</strong> 额外的行为 </a></li><li class="chapter-item expanded "><a href="calibre_link-166.html"><strong aria-hidden="true">14.8.</strong> 管理事务 </a></li><li class="chapter-item expanded "><a href="calibre_link-167.html"><strong aria-hidden="true">14.9.</strong> 警告 </a></li><li class="chapter-item expanded "><a href="calibre_link-167.html"><strong aria-hidden="true">14.10.</strong> 类型层级 </a></li><li class="chapter-item expanded "><a href="calibre_link-168.html"><strong aria-hidden="true">14.11.</strong> 资源库 vs 数据访问对象（DAO） </a></li><li class="chapter-item expanded "><a href="calibre_link-169.html"><strong aria-hidden="true">14.12.</strong> 测试资源库 </a></li><li class="chapter-item expanded "><a href="calibre_link-170.html"><strong aria-hidden="true">14.13.</strong> 以内存实现进行测试 </a></li><li class="chapter-item expanded "><a href="calibre_link-171.html"><strong aria-hidden="true">14.14.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-172.html"><strong aria-hidden="true">15.</strong> 第13章 集成限界上下文 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-172.html"><strong aria-hidden="true">15.1.</strong> 集成基础知识 </a></li><li class="chapter-item expanded "><a href="calibre_link-173.html"><strong aria-hidden="true">15.2.</strong> 分布式系统之间存在根本性区别 </a></li><li class="chapter-item expanded "><a href="calibre_link-173.html"><strong aria-hidden="true">15.3.</strong> 跨系统边界交换信息 </a></li><li class="chapter-item expanded "><a href="calibre_link-174.html"><strong aria-hidden="true">15.4.</strong> 通过REST资源集成限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-175.html"><strong aria-hidden="true">15.5.</strong> 实现REST资源 </a></li><li class="chapter-item expanded "><a href="calibre_link-176.html"><strong aria-hidden="true">15.6.</strong> 使用防腐层实现REST客户端 </a></li><li class="chapter-item expanded "><a href="calibre_link-177.html"><strong aria-hidden="true">15.7.</strong> 通过消息集成限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-177.html"><strong aria-hidden="true">15.8.</strong> 从Scrum的产品负责人和团队成员处得到持续通知 </a></li><li class="chapter-item expanded "><a href="calibre_link-178.html"><strong aria-hidden="true">15.9.</strong> 你能处理这样的职责吗？ </a></li><li class="chapter-item expanded "><a href="calibre_link-179.html"><strong aria-hidden="true">15.10.</strong> 长时处理过程，以及避免职责 </a></li><li class="chapter-item expanded "><a href="calibre_link-180.html"><strong aria-hidden="true">15.11.</strong> 长时处理过程的状态机和超时跟踪器 </a></li><li class="chapter-item expanded "><a href="calibre_link-181.html"><strong aria-hidden="true">15.12.</strong> 设计一个更复杂的长时处理过程 </a></li><li class="chapter-item expanded "><a href="calibre_link-182.html"><strong aria-hidden="true">15.13.</strong> 当消息机制或你的系统不可用时 </a></li><li class="chapter-item expanded "><a href="calibre_link-183.html"><strong aria-hidden="true">15.14.</strong> 本章小结 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-184.html"><strong aria-hidden="true">16.</strong> 第14章 应用程序 </a></li><li><ol class="section"><li class="chapter-item expanded "><a href="calibre_link-185.html"><strong aria-hidden="true">16.1.</strong> 用户界面 </a></li><li class="chapter-item expanded "><a href="calibre_link-186.html"><strong aria-hidden="true">16.2.</strong> 渲染领域对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-187.html"><strong aria-hidden="true">16.3.</strong> 渲染数据传输对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-187.html"><strong aria-hidden="true">16.4.</strong> 使用调停者发布聚合的内部状态 </a></li><li class="chapter-item expanded "><a href="calibre_link-188.html"><strong aria-hidden="true">16.5.</strong> 通过领域负载对象渲染聚合实例 </a></li><li class="chapter-item expanded "><a href="calibre_link-189.html"><strong aria-hidden="true">16.6.</strong> 聚合实例的状态展现</a></li><li class="chapter-item expanded "><a href="calibre_link-190.html"><strong aria-hidden="true">16.7.</strong> 用例优化资源库查询 </a></li><li class="chapter-item expanded "><a href="calibre_link-190.html"><strong aria-hidden="true">16.8.</strong> 处理不同类型的客户端 </a></li><li class="chapter-item expanded "><a href="calibre_link-191.html"><strong aria-hidden="true">16.9.</strong> 渲染适配器以及处理用户编辑 </a></li><li class="chapter-item expanded "><a href="calibre_link-192.html"><strong aria-hidden="true">16.10.</strong> 应用服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-192.html"><strong aria-hidden="true">16.11.</strong> 示例应用服务 </a></li><li class="chapter-item expanded "><a href="calibre_link-193.html"><strong aria-hidden="true">16.12.</strong> 解耦服务输出 </a></li><li class="chapter-item expanded "><a href="calibre_link-194.html"><strong aria-hidden="true">16.13.</strong> 组合多个限界上下文 </a></li><li class="chapter-item expanded "><a href="calibre_link-195.html"><strong aria-hidden="true">16.14.</strong> 基础设施 </a></li><li class="chapter-item expanded "><a href="calibre_link-196.html"><strong aria-hidden="true">16.15.</strong> 企业组件容器 </a></li><li class="chapter-item expanded "><a href="calibre_link-197.html"><strong aria-hidden="true">16.16.</strong> 本章小结 </a></li><li class="chapter-item expanded "><a href="calibre_link-198.html"><strong aria-hidden="true">16.17.</strong> 附录A 聚合与事件源：A+ES </a></li><li class="chapter-item expanded "><a href="calibre_link-199.html"><strong aria-hidden="true">16.18.</strong> 应用服务内部 </a></li><li class="chapter-item expanded "><a href="calibre_link-200.html"><strong aria-hidden="true">16.19.</strong> 命令处理器 </a></li><li class="chapter-item expanded "><a href="calibre_link-201.html"><strong aria-hidden="true">16.20.</strong> Lambda语法</a></li><li class="chapter-item expanded "><a href="calibre_link-202.html"><strong aria-hidden="true">16.21.</strong> 并发控制 </a></li><li class="chapter-item expanded "><a href="calibre_link-203.html"><strong aria-hidden="true">16.22.</strong> A+ES所带来的结构自由性 </a></li><li class="chapter-item expanded "><a href="calibre_link-203.html"><strong aria-hidden="true">16.23.</strong> 性能 </a></li><li class="chapter-item expanded "><a href="calibre_link-204.html"><strong aria-hidden="true">16.24.</strong> 实现事件存储 </a></li><li class="chapter-item expanded "><a href="calibre_link-205.html"><strong aria-hidden="true">16.25.</strong> 关系型持久化 </a></li><li class="chapter-item expanded "><a href="calibre_link-206.html"><strong aria-hidden="true">16.26.</strong> BLOB持久化 </a></li><li class="chapter-item expanded "><a href="calibre_link-207.html"><strong aria-hidden="true">16.27.</strong> 专注的聚合 </a></li><li class="chapter-item expanded "><a href="calibre_link-208.html"><strong aria-hidden="true">16.28.</strong> 读模型投射 </a></li><li class="chapter-item expanded "><a href="calibre_link-209.html"><strong aria-hidden="true">16.29.</strong> 与聚合设计一道使用 </a></li><li class="chapter-item expanded "><a href="calibre_link-209.html"><strong aria-hidden="true">16.30.</strong> 增强事件 </a></li><li class="chapter-item expanded "><a href="calibre_link-210.html"><strong aria-hidden="true">16.31.</strong> 工具和模式 </a></li><li class="chapter-item expanded "><a href="calibre_link-211.html"><strong aria-hidden="true">16.32.</strong> 事件序列器 </a></li><li class="chapter-item expanded "><a href="calibre_link-212.html"><strong aria-hidden="true">16.33.</strong> 事件不变性 </a></li><li class="chapter-item expanded "><a href="calibre_link-212.html"><strong aria-hidden="true">16.34.</strong> 值对象 </a></li><li class="chapter-item expanded "><a href="calibre_link-213.html"><strong aria-hidden="true">16.35.</strong> 协议生成 </a></li><li class="chapter-item expanded "><a href="calibre_link-214.html"><strong aria-hidden="true">16.36.</strong> 单元测试和需求规范 </a></li><li class="chapter-item expanded "><a href="calibre_link-215.html"><strong aria-hidden="true">16.37.</strong> 事件源和函数式语言 </a></li></ol></li><li class="chapter-item expanded "><a href="calibre_link-216.html"><strong aria-hidden="true">17.</strong> 参考文献</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">实现领域驱动设计</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="一个计算过程"><a class="header" href="#一个计算过程">一个计算过程</a></h1>
+<div align = "center"><img src = "images/000278.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="前言"><a class="header" href="#前言">前言</a></h1>
+<div align = "center"><img src = "images/000117.jpg"/></div>  
+<div align = "center"><img src="images/000101.jpg" /></div>   
+<div align = "center"><img src="images/000400.jpg" /></div>   
+<div align = "center"><img src="images/000118.jpg" /></div>   
+<div align = "center"><img src="images/000417.jpg" /></div>   
+<div align = "center"><img src="images/000319.jpg" /></div>   
+<div align = "center"><img src="images/000377.jpg" /></div>   
+<div align = "center"><img src="images/000147.jpg" /></div>   
+<div align = "center"><img src="images/000446.jpg" /></div>   
+<div align = "center"><img src="images/000166.jpg" /></div>   
+<div align = "center"><img src="images/000466.jpg" /></div>   
+<div align = "center"><img src="images/000214.jpg" /></div>   
+<div align = "center"><img src="images/000512.jpg" /></div>   
+<div align = "center"><img src="images/000230.jpg" /></div>   
+<div align = "center"><img src="images/000530.jpg" /></div>   
+<div align = "center"><img src="images/000251.jpg" /></div>   
+<div align = "center"><img src="images/000001.jpg" /></div>   
+<div align = "center"><img src="images/000295.jpg" /></div>   
+<div align = "center"><img src="images/000016.jpg" /></div>   
+<div align = "center"><img src="images/000311.jpg" /></div>   
+<div align = "center"><img src="images/000050.jpg" /></div>   
+<div align = "center"><img src="images/000348.jpg" /></div>   
+<div align = "center"><img src="images/000071.jpg" /></div>   
+<div align = "center"><img src="images/000364.jpg" /></div>   
+<div align = "center"><img src="images/000112.jpg" /></div>   <div style="break-before: page; page-break-before: always;"></div><h1 id="第1章-ddd入门"><a class="header" href="#第1章-ddd入门">第1章 DDD入门</a></h1>
+<div align = "center"><img src = "images/000233.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="我能ddd吗"><a class="header" href="#我能ddd吗">我能DDD吗？</a></h1>
+<div align = "center"><img src = "images/000532.jpg"/></div>
+<div align = "center"><img src="images/000298.jpg"/></div>
+<div align = "center"><img src="images/000020.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="为什么我们需要ddd"><a class="header" href="#为什么我们需要ddd">为什么我们需要DDD</a></h1>
+<div align = "center"><img src = "images/000315.jpg"/></div>  
+<div align = "center"><img src="images/000037.jpg" /></div>   
+<div align = "center"><img src="images/000334.jpg" /></div>   
+<div align = "center"><img src="images/000056.jpg" /></div>   
+<div align = "center"><img src="images/000354.jpg" /></div>   
+<div align = "center"><img src="images/000074.jpg" /></div>   
+<div align = "center"><img src="images/000371.jpg" /></div>   
+<div align = "center"><img src="images/000090.jpg" /></div>   
+<div align = "center"><img src="images/000416.jpg" /></div>   
+<div align = "center"><img src="images/000137.jpg" /></div>   
+<div align = "center"><img src="images/000436.jpg" /></div>   
+<div align = "center"><img src="images/000154.jpg" /></div>   <div style="break-before: page; page-break-before: always;"></div><h1 id="如何ddd"><a class="header" href="#如何ddd">如何DDD</a></h1>
+<div align = "center"><img src = "images/000453.jpg"/></div>
+<div align = "center"><img src="images/000193.jpg" /></div>  
+<div align = "center"><img src="images/000491.jpg" /></div>  
+<div align = "center"><img src="images/000023.jpg" /></div>  
+<div align = "center"><img src="images/000049.jpg" /></div>  <div style="break-before: page; page-break-before: always;"></div><h1 id="使用ddd的业务价值"><a class="header" href="#使用ddd的业务价值">使用DDD的业务价值</a></h1>
+<div align = "center"><img src = "images/000076.jpg"/></div>  
+<div align = "center"><img src = "images/000128.jpg"/></div>  
+<div align = "center"><img src = "images/000155.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="实施ddd所面临的挑战"><a class="header" href="#实施ddd所面临的挑战">实施DDD所面临的挑战</a></h1>
+<div align = "center">
+<img src = "images/000182.jpg"/>
+<p class="calibre1"><a id="calibre_link-266"></a><img src="images/000210.jpg" alt="Image 63" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-267"></a><img src="images/000237.jpg" alt="Image 64" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-268"></a><img src="images/000264.jpg" alt="Image 65" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-269"></a><img src="images/000291.jpg" alt="Image 66" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-270"></a><img src="images/000318.jpg" alt="Image 67" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-271"></a><img src="images/000346.jpg" alt="Image 68" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-272"></a><img src="images/000373.jpg" alt="Image 69" class="calibre2" /></p>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="虚构的案例真实的实践"><a class="header" href="#虚构的案例真实的实践">虚构的案例，真实的实践</a></h1>
+<div align = "center"><img src = "images/000427.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-273"></a><img src="images/000454.jpg" alt="Image 71" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-274"></a><img src="images/000481.jpg" alt="Image 72" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结"><a class="header" href="#本章小结">本章小结</a></h1>
+<div align = "center"><img src = "images/000508.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="总览"><a class="header" href="#总览">总览</a></h1>
+<div align = "center"><img src = "images/000536.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="总览-1"><a class="header" href="#总览-1">总览</a></h1>
+<div align = "center"><img src = "images/000536.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="工作中的子域和限界上下文"><a class="header" href="#工作中的子域和限界上下文">工作中的子域和限界上下文</a></h1>
+<div align = "center"><img src = "images/000563.jpg"/></div>  
+<p class="calibre1"><a id="calibre_link-275"></a><img src="images/000013.jpg" alt="Image 76" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-276"></a><img src="images/000039.jpg" alt="Image 77" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-277"></a><img src="images/000066.jpg" alt="Image 78" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="将关注点放在核心域上"><a class="header" href="#将关注点放在核心域上">将关注点放在核心域上</a></h1>
+<div align = "center"><img src = "images/000091.jpg"/></div>    
+<p class="calibre1"><a id="calibre_link-278"></a><img src="images/000145.jpg" alt="Image 80" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-279"></a><img src="images/000172.jpg" alt="Image 81" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="战略设计为什么重要"><a class="header" href="#战略设计为什么重要">战略设计为什么重要</a></h1>
+<div align = "center"><img src = "images/000200.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-280"></a><img src="images/000227.jpg" alt="Image 83" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-281"></a><img src="images/000254.jpg" alt="Image 84" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="现实世界中领域和子域"><a class="header" href="#现实世界中领域和子域">现实世界中领域和子域</a></h1>
+<div align = "center"><img src = "images/000281.jpg"/></div>    
+<p class="calibre1"><a id="calibre_link-282"></a><img src="images/000308.jpg" alt="Image 86" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-283"></a><img src="images/000336.jpg" alt="Image 87" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-284"></a><img src="images/000363.jpg" alt="Image 88" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-285"></a><img src="images/000390.jpg" alt="Image 89" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="理解限界上下文"><a class="header" href="#理解限界上下文">理解限界上下文</a></h1>
+<div align = "center"><img src = "images/000444.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-286"></a><img src="images/000471.jpg" alt="Image 91" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-287"></a><img src="images/000498.jpg" alt="Image 92" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-288"></a><img src="images/000525.jpg" alt="Image 93" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="限界上下文不仅仅只包含模型"><a class="header" href="#限界上下文不仅仅只包含模型">限界上下文不仅仅只包含模型</a></h1>
+<div align = "center"><img src = "images/000553.jpg"/></div>  
+<p class="calibre1"><a id="calibre_link-289"></a><img src="images/000006.jpg" alt="Image 95" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="限界上下文的大小"><a class="header" href="#限界上下文的大小">限界上下文的大小</a></h1>
+<div align = "center"><img src = "images/000032.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-290"></a><img src="images/000059.jpg" alt="Image 97" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="与技术组件保持一致"><a class="header" href="#与技术组件保持一致">与技术组件保持一致</a></h1>
+<div align = "center"><img src = "images/000084.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="示例上下文"><a class="header" href="#示例上下文">示例上下文</a></h1>
+<div align = "center"><img src = "images/000183.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="协作上下文"><a class="header" href="#协作上下文">协作上下文</a></h1>
+<div align = "center"><img src = "images/000104.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-291"></a><img src="images/000133.jpg" alt="Image 101" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-292"></a><img src="images/000156.jpg" alt="Image 102" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-293"></a><img src="images/000185.jpg" alt="Image 103" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-294"></a><img src="images/000213.jpg" alt="Image 104" class="calibre2" /></p>
+<p class="calibre1"><a id="calibre_link-295"></a><img src="images/000242.jpg" alt="Image 105" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="身份与访问上下文"><a class="header" href="#身份与访问上下文">身份与访问上下文</a></h1>
+<div align = "center"><img src = "images/000267.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-296"></a><img src="images/000293.jpg" alt="Image 107" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="敏捷项目管理上下文"><a class="header" href="#敏捷项目管理上下文">敏捷项目管理上下文</a></h1>
+<div align = "center"><img src = "images/000321.jpg"/></div>   
+<p class="calibre1"><a id="calibre_link-297"></a><img src="images/000350.jpg" alt="Image 109" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-1"><a class="header" href="#本章小结-1">本章小结</a></h1>
+<div align = "center"><img src = "images/000403.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-298"></a><img src="images/000428.jpg" alt="Image 111" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="上下文映射图为什么重要"><a class="header" href="#上下文映射图为什么重要">上下文映射图为什么重要</a></h1>
+<div align = "center"><img src = "images/000511.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-299"></a><img src="images/000539.jpg" alt="Image 113" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="上下文映射图为什么重要-1"><a class="header" href="#上下文映射图为什么重要-1">上下文映射图为什么重要</a></h1>
+<div align = "center"><img src = "images/000511.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-299"></a><img src="images/000539.jpg" alt="Image 113" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="绘制上下文映射图"><a class="header" href="#绘制上下文映射图">绘制上下文映射图</a></h1>
+<div align = "center"><img src = "images/000566.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-300"></a><img src="images/000014.jpg" alt="Image 115" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="产品和组织关系"><a class="header" href="#产品和组织关系">产品和组织关系</a></h1>
+<div align = "center"><img src = "images/000041.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-301"></a><img src="images/000068.jpg" alt="Image 117" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-302"></a><img src="images/000093.jpg" alt="Image 118" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="映射3个示例限界上下文"><a class="header" href="#映射3个示例限界上下文">映射3个示例限界上下文</a></h1>
+<div align = "center"><img src = "images/000121.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-303"></a><img src="images/000173.jpg" alt="Image 120" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-304"></a><img src="images/000201.jpg" alt="Image 121" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-305"></a><img src="images/000229.jpg" alt="Image 122" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-306"></a><img src="images/000257.jpg" alt="Image 123" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-307"></a><img src="images/000282.jpg" alt="Image 124" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-308"></a><img src="images/000309.jpg" alt="Image 125" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-309"></a><img src="images/000338.jpg" alt="Image 126" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-310"></a><img src="images/000366.jpg" alt="Image 127" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-311"></a><img src="images/000393.jpg" alt="Image 128" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-312"></a><img src="images/000421.jpg" alt="Image 129" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-313"></a><img src="images/000473.jpg" alt="Image 130" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-314"></a><img src="images/000500.jpg" alt="Image 131" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-315"></a><img src="images/000529.jpg" alt="Image 132" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-316"></a><img src="images/000557.jpg" alt="Image 133" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-2"><a class="header" href="#本章小结-2">本章小结</a></h1>
+<div align = "center"><img src = "images/000007.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第4章-架构"><a class="header" href="#第4章-架构">第4章 架构</a></h1>
+<div align = "center"><img src = "images/000034.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="采访一个成功的cio"><a class="header" href="#采访一个成功的cio">采访一个成功的CIO</a></h1>
+<div align = "center"><img src = "images/000061.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-317"></a><img src="images/000086.jpg" alt="Image 137" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-318"></a><img src="images/000113.jpg" alt="Image 138" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-319"></a><img src="images/000139.jpg" alt="Image 139" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="分层"><a class="header" href="#分层">分层</a></h1>
+<div align = "center"><img src = "images/000195.jpg"/></div>
+<p class="calibre1"><a id="calibre_link-320"></a><img src="images/000222.jpg" alt="Image 141" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-321"></a><img src="images/000250.jpg" alt="Image 142" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="依赖倒置原则"><a class="header" href="#依赖倒置原则">依赖倒置原则</a></h1>
+<div align = "center"><img src = "images/000277.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-322"></a><img src="images/000303.jpg" alt="Image 144" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-323"></a><img src="images/000331.jpg" alt="Image 145" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="六边形架构端口与适配器"><a class="header" href="#六边形架构端口与适配器">六边形架构（端口与适配器）</a></h1>
+<div align = "center"><img src = "images/000358.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-324"></a><img src="images/000385.jpg" alt="Image 147" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-325"></a><img src="images/000413.jpg" alt="Image 148" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-326"></a><img src="images/000438.jpg" alt="Image 149" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="面向服务架构"><a class="header" href="#面向服务架构">面向服务架构</a></h1>
+<div align = "center"><img src = "images/000493.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-327"></a><img src="images/000521.jpg" alt="Image 151" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-328"></a><img src="images/000548.jpg" alt="Image 152" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="rest作为一种架构风格"><a class="header" href="#rest作为一种架构风格">REST作为一种架构风格</a></h1>
+<div align = "center"><img src = "images/000000.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rest作为一种架构风格-1"><a class="header" href="#rest作为一种架构风格-1">REST作为一种架构风格</a></h1>
+<div align = "center"><img src = "images/000000.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="restful-http服务器的关键方面"><a class="header" href="#restful-http服务器的关键方面">RESTful HTTP服务器的关键方面</a></h1>
+<div align = "center"><img src = "images/000024.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="restful-http客户端的关键方面"><a class="header" href="#restful-http客户端的关键方面">RESTful HTTP客户端的关键方面</a></h1>
+<div align = "center"><img src = "images/000051.jpg"/></div>
+ <p class="calibre1"><img src="images/000078.png" alt="Image 156" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="rest和ddd"><a class="header" href="#rest和ddd">REST和DDD</a></h1>
+<div align = "center"><img src = "images/000105.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="命令和查询职责分离cqrs"><a class="header" href="#命令和查询职责分离cqrs">命令和查询职责分离——CQRS</a></h1>
+<div align = "center"><img src = "images/000132.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-329"></a><img src="images/000157.jpg" alt="Image 159" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="命令和查询职责分离cqrs-1"><a class="header" href="#命令和查询职责分离cqrs-1">命令和查询职责分离——CQRS</a></h1>
+<div align = "center"><img src = "images/000132.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-329"></a><img src="images/000157.jpg" alt="Image 159" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="cqrs的各个方面"><a class="header" href="#cqrs的各个方面">CQRS的各个方面</a></h1>
+<div align = "center"><img src = "images/000186.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-330"></a><img src="images/000241.jpg" alt="Image 161" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-331"></a><img src="images/000268.jpg" alt="Image 162" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-332"></a><img src="images/000294.jpg" alt="Image 163" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-333"></a><img src="images/000322.jpg" alt="Image 164" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="处理具有最终一致性的查询模型"><a class="header" href="#处理具有最终一致性的查询模型">处理具有最终一致性的查询模型</a></h1>
+<div align = "center"><img src = "images/000349.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="事件驱动架构"><a class="header" href="#事件驱动架构">事件驱动架构</a></h1>
+<div align = "center"><img src = "images/000376.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-334"></a><img src="images/000404.jpg" alt="Image 167" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="管道和过滤器"><a class="header" href="#管道和过滤器">管道和过滤器</a></h1>
+<div align = "center"><img src = "images/000429.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-335"></a><img src="images/000456.jpg" alt="Image 169" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-336"></a><img src="images/000483.jpg" alt="Image 170" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="长时处理过程也叫saga"><a class="header" href="#长时处理过程也叫saga">长时处理过程（也叫Saga）</a></h1>
+<div align = "center"><img src = "images/000540.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-337"></a><img src="images/000567.jpg" alt="Image 172" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-338"></a><img src="images/000015.jpg" alt="Image 173" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-339"></a><img src="images/000042.jpg" alt="Image 174" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-340"></a><img src="images/000069.jpg" alt="Image 175" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-341"></a><img src="images/000094.jpg" alt="Image 176" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="事件源"><a class="header" href="#事件源">事件源</a></h1>
+<div align = "center"><img src = "images/000122.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-342"></a><img src="images/000148.jpg" alt="Image 178" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-343"></a><img src="images/000174.jpg" alt="Image 179" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="数据网织和基于网格的分布式计算"><a class="header" href="#数据网织和基于网格的分布式计算">数据网织和基于网格的分布式计算</a></h1>
+<div align = "center"><img src = "images/000202.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="数据复制"><a class="header" href="#数据复制">数据复制</a></h1>
+<div align = "center"><img src = "images/000258.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="持续查询"><a class="header" href="#持续查询">持续查询</a></h1>
+<div align = "center"><img src = "images/000283.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="持续查询-1"><a class="header" href="#持续查询-1">持续查询</a></h1>
+<div align = "center"><img src = "images/000283.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="分布式处理"><a class="header" href="#分布式处理">分布式处理</a></h1>
+<div align = "center"><img src = "images/000310.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-344"></a><img src="images/000339.jpg" alt="Image 184" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-3"><a class="header" href="#本章小结-3">本章小结</a></h1>
+<div align = "center"><img src = "images/000367.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="为什么使用实体"><a class="header" href="#为什么使用实体">为什么使用实体</a></h1>
+<div align = "center"><img src = "images/000394.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-345"></a><img src="images/000422.jpg" alt="Image 187" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="为什么使用实体-1"><a class="header" href="#为什么使用实体-1">为什么使用实体</a></h1>
+<div align = "center"><img src = "images/000394.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-345"></a><img src="images/000422.jpg" alt="Image 187" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="唯一标识"><a class="header" href="#唯一标识">唯一标识</a></h1>
+<div align = "center"><img src = "images/000447.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="用户提供唯一标识"><a class="header" href="#用户提供唯一标识">用户提供唯一标识</a></h1>
+<div align = "center"><img src = "images/000474.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="应用程序生成唯一标识"><a class="header" href="#应用程序生成唯一标识">应用程序生成唯一标识</a></h1>
+<div align = "center"><img src = "images/000501.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-346"></a><img src="images/000558.jpg" alt="Image 191" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-347"></a><img src="images/000008.jpg" alt="Image 192" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="持久化机制生成唯一标识"><a class="header" href="#持久化机制生成唯一标识">持久化机制生成唯一标识</a></h1>
+<div align = "center"><img src = "images/000035.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-348"></a><img src="images/000062.jpg" alt="Image 194" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-349"></a><img src="images/000087.jpg" alt="Image 195" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-350"></a><img src="images/000114.jpg" alt="Image 196" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="另一个限界上下文提供唯一标识"><a class="header" href="#另一个限界上下文提供唯一标识">另一个限界上下文提供唯一标识</a></h1>
+<div align = "center"><img src = "images/000140.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="标识生成时间"><a class="header" href="#标识生成时间">标识生成时间</a></h1>
+<div align = "center"><img src = "images/000167.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-351"></a><img src="images/000196.jpg" alt="Image 199" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="委派标识"><a class="header" href="#委派标识">委派标识</a></h1>
+<div align = "center"><img src = "images/000223.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-352"></a><img src="images/000304.jpg" alt="Image 201" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="标识稳定性"><a class="header" href="#标识稳定性">标识稳定性</a></h1>
+<div align = "center"><img src = "images/000332.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-353"></a><img src="images/000359.jpg" alt="Image 203" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="发现实体及其本质特征"><a class="header" href="#发现实体及其本质特征">发现实体及其本质特征</a></h1>
+<div align = "center"><img src = "images/000386.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="揭开实体及其本质特征的神秘面纱"><a class="header" href="#揭开实体及其本质特征的神秘面纱">揭开实体及其本质特征的神秘面纱</a></h1>
+<div align = "center"><img src = "images/000414.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-354"></a><img src="images/000439.jpg" alt="Image 206" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-355"></a><img src="images/000467.jpg" alt="Image 207" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-356"></a><img src="images/000494.jpg" alt="Image 208" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="挖掘实体的关键行为"><a class="header" href="#挖掘实体的关键行为">挖掘实体的关键行为</a></h1>
+<div align = "center"><img src = "images/000522.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-357"></a><img src="images/000549.jpg" alt="Image 210" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-358"></a><img src="images/000025.jpg" alt="Image 211" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-359"></a><img src="images/000052.jpg" alt="Image 212" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="角色和职责"><a class="header" href="#角色和职责">角色和职责</a></h1>
+<div align = "center"><img src = "images/000079.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-360"></a><img src="images/000106.jpg" alt="Image 214" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-361"></a><img src="images/000134.jpg" alt="Image 215" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-362"></a><img src="images/000158.jpg" alt="Image 216" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-363"></a><img src="images/000187.jpg" alt="Image 217" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="创建实体"><a class="header" href="#创建实体">创建实体</a></h1>
+<div align = "center"><img src = "images/000215.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-364"></a><img src="images/000243.jpg" alt="Image 219" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="验证"><a class="header" href="#验证">验证</a></h1>
+<div align = "center"><img src = "images/000269.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-365"></a><img src="images/000323.jpg" alt="Image 221" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-366"></a><img src="images/000351.jpg" alt="Image 222" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-367"></a><img src="images/000378.jpg" alt="Image 223" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-368"></a><img src="images/000405.jpg" alt="Image 224" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-369"></a><img src="images/000430.jpg" alt="Image 225" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-370"></a><img src="images/000457.jpg" alt="Image 226" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-371"></a><img src="images/000484.jpg" alt="Image 227" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-372"></a><img src="images/000513.jpg" alt="Image 228" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-4"><a class="header" href="#本章小结-4">本章小结</a></h1>
+<div align = "center"><img src = "images/000541.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-5"><a class="header" href="#本章小结-5">本章小结</a></h1>
+<div align = "center"><img src = "images/000541.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第6章-值对象"><a class="header" href="#第6章-值对象">第6章 值对象</a></h1>
+<div align = "center"><img src = "images/000568.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="值对象的特征"><a class="header" href="#值对象的特征">值对象的特征</a></h1>
+<div align = "center"><img src = "images/000043.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="不变性"><a class="header" href="#不变性">不变性</a></h1>
+<div align = "center"><img src = "images/000070.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="不变性-1"><a class="header" href="#不变性-1">不变性</a></h1>
+<div align = "center"><img src = "images/000070.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="概念整体"><a class="header" href="#概念整体">概念整体</a></h1>
+<div align = "center"><img src = "images/000095.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-373"></a><img src="images/000123.jpg" alt="Image 234" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-374"></a><img src="images/000149.jpg" alt="Image 235" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="可替换性"><a class="header" href="#可替换性">可替换性</a></h1>
+<div align = "center"><img src = "images/000175.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="值对象相等性"><a class="header" href="#值对象相等性">值对象相等性</a></h1>
+<div align = "center"><img src = "images/000203.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="无副作用行为"><a class="header" href="#无副作用行为">无副作用行为</a></h1>
+<div align = "center"><img src = "images/000231.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-375"></a><img src="images/000259.jpg" alt="Image 239" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-376"></a><img src="images/000284.jpg" alt="Image 240" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="最小化集成"><a class="header" href="#最小化集成">最小化集成</a></h1>
+<div align = "center"><img src = "images/000340.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-377"></a><img src="images/000368.jpg" alt="Image 242" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="用值对象表示标准类型"><a class="header" href="#用值对象表示标准类型">用值对象表示标准类型</a></h1>
+<div align = "center"><img src = "images/000395.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-378"></a><img src="images/000420.jpg" alt="Image 244" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-379"></a><img src="images/000449.jpg" alt="Image 245" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-380"></a><img src="images/000475.jpg" alt="Image 246" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="测试值对象"><a class="header" href="#测试值对象">测试值对象</a></h1>
+<div align = "center"><img src = "images/000502.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-381"></a><img src="images/000528.jpg" alt="Image 248" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-382"></a><img src="images/000555.jpg" alt="Image 249" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-383"></a><img src="images/000485.jpg" alt="Image 250" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="实现"><a class="header" href="#实现">实现</a></h1>
+<div align = "center"><img src = "images/000458.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-384"></a><img src="images/000107.jpg" alt="Image 252" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-385"></a><img src="images/000131.jpg" alt="Image 253" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-386"></a><img src="images/000161.jpg" alt="Image 254" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-387"></a><img src="images/000189.jpg" alt="Image 255" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="持久化值对象"><a class="header" href="#持久化值对象">持久化值对象</a></h1>
+<div align = "center"><img src = "images/000216.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="拒绝由数据建模泄漏带来的不利影响"><a class="header" href="#拒绝由数据建模泄漏带来的不利影响">拒绝由数据建模泄漏带来的不利影响</a></h1>
+<div align = "center"><img src = "images/000240.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="orm与单个值对象"><a class="header" href="#orm与单个值对象">ORM与单个值对象</a></h1>
+<div align = "center"><img src = "images/000266.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-388"></a><img src="images/000297.jpg" alt="Image 259" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-389"></a><img src="images/000324.jpg" alt="Image 260" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="多个值对象序列化到单个列中"><a class="header" href="#多个值对象序列化到单个列中">多个值对象序列化到单个列中</a></h1>
+<div align = "center"><img src = "images/000375.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="使用数据库实体保存多个值对象"><a class="header" href="#使用数据库实体保存多个值对象">使用数据库实体保存多个值对象</a></h1>
+<div align = "center"><img src = "images/000401.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-390"></a><img src="images/000431.jpg" alt="Image 263" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-391"></a><img src="images/000455.jpg" alt="Image 264" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-392"></a><img src="images/000482.jpg" alt="Image 265" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="使用联合表保存多个值对象"><a class="header" href="#使用联合表保存多个值对象">使用联合表保存多个值对象</a></h1>
+<div align = "center"><img src = "images/000509.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="orm与枚举状态对象"><a class="header" href="#orm与枚举状态对象">ORM与枚举状态对象</a></h1>
+<div align = "center"><img src = "images/000537.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-393"></a><img src="images/000565.jpg" alt="Image 268" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-394"></a><img src="images/000018.jpg" alt="Image 269" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-6"><a class="header" href="#本章小结-6">本章小结</a></h1>
+<div align = "center"><img src = "images/000044.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第7章-领域服务"><a class="header" href="#第7章-领域服务">第7章 领域服务</a></h1>
+<div align = "center"><img src = "images/000096.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-395"></a><img src="images/000120.jpg" alt="Image 272" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="什么是领域服务首先什么不是领域服务"><a class="header" href="#什么是领域服务首先什么不是领域服务">什么是领域服务（首先，什么不是领域服务）</a></h1>
+<div align = "center"><img src = "images/000150.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="请确定你是否需要一个领域服务"><a class="header" href="#请确定你是否需要一个领域服务">请确定你是否需要一个领域服务</a></h1>
+<div align = "center"><img src = "images/000176.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-396"></a><img src="images/000204.jpg" alt="Image 275" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-397"></a><img src="images/000228.jpg" alt="Image 276" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="建模领域服务"><a class="header" href="#建模领域服务">建模领域服务</a></h1>
+<div align = "center"><img src = "images/000255.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-398"></a><img src="images/000286.jpg" alt="Image 278" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-399"></a><img src="images/000312.jpg" alt="Image 279" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="独立接口有必要吗"><a class="header" href="#独立接口有必要吗">独立接口有必要吗</a></h1>
+<div align = "center"><img src = "images/000337.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-400"></a><img src="images/000391.jpg" alt="Image 281" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-401"></a><img src="images/000418.jpg" alt="Image 282" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-402"></a><img src="images/000445.jpg" alt="Image 283" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-403"></a><img src="images/000476.jpg" alt="Image 284" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="一个计算过程-1"><a class="header" href="#一个计算过程-1">一个计算过程</a></h1>
+<div align = "center"><img src = "images/000278.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="转换服务"><a class="header" href="#转换服务">转换服务</a></h1>
+<div align = "center"><img src = "images/000531.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="测试领域服务"><a class="header" href="#测试领域服务">测试领域服务</a></h1>
+<div align = "center"><img src = "images/000556.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-404"></a><img src="images/000010.jpg" alt="Image 287" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-405"></a><img src="images/000036.jpg" alt="Image 288" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="测试领域服务-1"><a class="header" href="#测试领域服务-1">测试领域服务</a></h1>
+<div align = "center"><img src = "images/000556.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-404"></a><img src="images/000010.jpg" alt="Image 287" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-405"></a><img src="images/000036.jpg" alt="Image 288" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-7"><a class="header" href="#本章小结-7">本章小结</a></h1>
+<div align = "center"><img src = "images/000063.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="何时为什么使用领域事件"><a class="header" href="#何时为什么使用领域事件">何时/为什么使用领域事件</a></h1>
+<div align = "center"><img src = "images/000085.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-406"></a><img src="images/000141.jpg" alt="Image 291" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-407"></a><img src="images/000168.jpg" alt="Image 292" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="何时为什么使用领域事件-1"><a class="header" href="#何时为什么使用领域事件-1">何时/为什么使用领域事件</a></h1>
+<div align = "center"><img src = "images/000085.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-406"></a><img src="images/000141.jpg" alt="Image 291" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-407"></a><img src="images/000168.jpg" alt="Image 292" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="建模领域事件"><a class="header" href="#建模领域事件">建模领域事件</a></h1>
+<div align = "center"><img src = "images/000194.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-408"></a><img src="images/000221.jpg" alt="Image 294" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-409"></a><img src="images/000248.jpg" alt="Image 295" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-410"></a><img src="images/000276.jpg" alt="Image 296" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-411"></a><img src="images/000302.jpg" alt="Image 297" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="创建具有聚合特征的领域事件"><a class="header" href="#创建具有聚合特征的领域事件">创建具有聚合特征的领域事件</a></h1>
+<div align = "center"><img src = "images/000330.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="身份标识"><a class="header" href="#身份标识">身份标识</a></h1>
+<div align = "center"><img src = "images/000360.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="发送方"><a class="header" href="#发送方">发送方</a></h1>
+<div align = "center"><img src = "images/000387.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-412"></a><img src="images/000468.jpg" alt="Image 301" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-413"></a><img src="images/000495.jpg" alt="Image 302" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-414"></a><img src="images/000520.jpg" alt="Image 303" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="发送方-1"><a class="header" href="#发送方-1">发送方</a></h1>
+<div align = "center"><img src = "images/000387.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-412"></a><img src="images/000468.jpg" alt="Image 301" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-413"></a><img src="images/000495.jpg" alt="Image 302" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-414"></a><img src="images/000520.jpg" alt="Image 303" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="订阅方"><a class="header" href="#订阅方">订阅方</a></h1>
+<div align = "center"><img src = "images/000547.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-415"></a><img src="images/000002.jpg" alt="Image 305" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="消息设施的一致性"><a class="header" href="#消息设施的一致性">消息设施的一致性</a></h1>
+<div align = "center"><img src = "images/000026.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="消息设施的一致性-1"><a class="header" href="#消息设施的一致性-1">消息设施的一致性</a></h1>
+<div align = "center"><img src = "images/000026.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="自治服务和系统"><a class="header" href="#自治服务和系统">自治服务和系统</a></h1>
+<div align = "center"><img src = "images/000053.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="容许时延"><a class="header" href="#容许时延">容许时延</a></h1>
+<div align = "center"><img src = "images/000077.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="事件存储"><a class="header" href="#事件存储">事件存储</a></h1>
+<div align = "center"><img src = "images/000102.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-416"></a><img src="images/000129.jpg" alt="Image 310" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-417"></a><img src="images/000184.jpg" alt="Image 311" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-418"></a><img src="images/000211.jpg" alt="Image 312" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-419"></a><img src="images/000238.jpg" alt="Image 313" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="以rest资源的方式发布事件通知"><a class="header" href="#以rest资源的方式发布事件通知">以REST资源的方式发布事件通知</a></h1>
+<div align = "center"><img src = "images/000270.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-420"></a><img src="images/000296.jpg" alt="Image 315" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-421"></a><img src="images/000325.jpg" alt="Image 316" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-422"></a><img src="images/000352.jpg" alt="Image 317" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="以rest资源的方式发布事件通知-1"><a class="header" href="#以rest资源的方式发布事件通知-1">以REST资源的方式发布事件通知</a></h1>
+<div align = "center"><img src = "images/000270.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-420"></a><img src="images/000296.jpg" alt="Image 315" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-421"></a><img src="images/000325.jpg" alt="Image 316" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-422"></a><img src="images/000352.jpg" alt="Image 317" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="通过消息中间件发布事件通知"><a class="header" href="#通过消息中间件发布事件通知">通过消息中间件发布事件通知</a></h1>
+<div align = "center"><img src = "images/000379.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现-1"><a class="header" href="#实现-1">实现</a></h1>
+<div align = "center"><img src = "images/000402.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="发布notificationlog"><a class="header" href="#发布notificationlog">发布NotificationLog</a></h1>
+<div align = "center"><img src = "images/000432.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-423"></a><img src="images/000486.jpg" alt="Image 321" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-424"></a><img src="images/000510.jpg" alt="Image 322" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-425"></a><img src="images/000538.jpg" alt="Image 323" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-426"></a><img src="images/000564.jpg" alt="Image 324" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="发布基于消息的事件通知"><a class="header" href="#发布基于消息的事件通知">发布基于消息的事件通知</a></h1>
+<div align = "center"><img src = "images/000017.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-427"></a><img src="images/000040.jpg" alt="Image 326" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-428"></a><img src="images/000067.jpg" alt="Image 327" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-429"></a><img src="images/000092.jpg" alt="Image 328" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-430"></a><img src="images/000119.jpg" alt="Image 329" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-431"></a><img src="images/000146.jpg" alt="Image 330" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-432"></a><img src="images/000205.jpg" alt="Image 331" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-8"><a class="header" href="#本章小结-8">本章小结</a></h1>
+<div align = "center"><img src = "images/000232.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="通过模块完成设计"><a class="header" href="#通过模块完成设计">通过模块完成设计</a></h1>
+<div align = "center"><img src = "images/000256.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-433"></a><img src="images/000285.jpg" alt="Image 334" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-434"></a><img src="images/000313.jpg" alt="Image 335" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="通过模块完成设计-1"><a class="header" href="#通过模块完成设计-1">通过模块完成设计</a></h1>
+<div align = "center"><img src = "images/000256.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-433"></a><img src="images/000285.jpg" alt="Image 334" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-434"></a><img src="images/000313.jpg" alt="Image 335" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="领域模型的命名规范"><a class="header" href="#领域模型的命名规范">领域模型的命名规范</a></h1>
+<div align = "center"><img src = "images/000341.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-435"></a><img src="images/000365.jpg" alt="Image 337" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-436"></a><img src="images/000392.jpg" alt="Image 338" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="领域模型的命名规范-1"><a class="header" href="#领域模型的命名规范-1">领域模型的命名规范</a></h1>
+<div align = "center"><img src = "images/000341.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-435"></a><img src="images/000365.jpg" alt="Image 337" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-436"></a><img src="images/000392.jpg" alt="Image 338" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="敏捷项目管理上下文中的模块"><a class="header" href="#敏捷项目管理上下文中的模块">敏捷项目管理上下文中的模块</a></h1>
+<div align = "center"><img src = "images/000419.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-437"></a><img src="images/000448.jpg" alt="Image 340" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-438"></a><img src="images/000499.jpg" alt="Image 341" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="其他层中的模块"><a class="header" href="#其他层中的模块">其他层中的模块</a></h1>
+<div align = "center"><img src = "images/000527.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="先考虑模块再是限界上下文"><a class="header" href="#先考虑模块再是限界上下文">先考虑模块，再是限界上下文</a></h1>
+<div align = "center"><img src = "images/000554.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-9"><a class="header" href="#本章小结-9">本章小结</a></h1>
+<div align = "center"><img src = "images/000009.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第10章-聚合"><a class="header" href="#第10章-聚合">第10章 聚合</a></h1>
+<div align = "center"><img src = "images/000033.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="在scrum核心领域中使用聚合"><a class="header" href="#在scrum核心领域中使用聚合">在Scrum核心领域中使用聚合</a></h1>
+<div align = "center"><img src = "images/000060.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第一次尝试臃肿的聚合"><a class="header" href="#第一次尝试臃肿的聚合">第一次尝试：臃肿的聚合</a></h1>
+<div align = "center"><img src = "images/000088.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第二次尝试多个聚合"><a class="header" href="#第二次尝试多个聚合">第二次尝试：多个聚合</a></h1>
+<div align = "center"><img src = "images/000115.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-439"></a><img src="images/000142.jpg" alt="Image 349" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-440"></a><img src="images/000169.jpg" alt="Image 350" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="原则在一致性边界之内建模真正的不变条件"><a class="header" href="#原则在一致性边界之内建模真正的不变条件">原则：在一致性边界之内建模真正的不变条件</a></h1>
+<div align = "center"><img src = "images/000224.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-441"></a><img src="images/000249.jpg" alt="Image 352" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="原则设计小聚合"><a class="header" href="#原则设计小聚合">原则：设计小聚合</a></h1>
+<div align = "center"><img src = "images/000275.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-442"></a><img src="images/000305.jpg" alt="Image 354" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="不要相信每一个用例"><a class="header" href="#不要相信每一个用例">不要相信每一个用例</a></h1>
+<div align = "center"><img src = "images/000333.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="原则通过唯一标识引用其他聚合"><a class="header" href="#原则通过唯一标识引用其他聚合">原则：通过唯一标识引用其他聚合</a></h1>
+<div align = "center"><img src = "images/000357.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-443"></a><img src="images/000384.jpg" alt="Image 357" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="通过标识引用使多个聚合协同工作"><a class="header" href="#通过标识引用使多个聚合协同工作">通过标识引用使多个聚合协同工作</a></h1>
+<div align = "center"><img src = "images/000411.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="建模对象导航性"><a class="header" href="#建模对象导航性">建模对象导航性</a></h1>
+<div align = "center"><img src = "images/000440.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="可伸缩性和分布式"><a class="header" href="#可伸缩性和分布式">可伸缩性和分布式</a></h1>
+<div align = "center"><img src = "images/000465.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="原则在边界之外使用最终一致性"><a class="header" href="#原则在边界之外使用最终一致性">原则：在边界之外使用最终一致性</a></h1>
+<div align = "center"><img src = "images/000519.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="谁的任务"><a class="header" href="#谁的任务">谁的任务？</a></h1>
+<div align = "center"><img src = "images/000550.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="打破原则的理由"><a class="header" href="#打破原则的理由">打破原则的理由</a></h1>
+<div align = "center"><img src = "images/000003.jpg"/></div>  
+<div align = "center"><img src = "images/000027.jpg"/></div>
+<div align = "center"><img src = "images/000054.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="重新思考设计"><a class="header" href="#重新思考设计">重新思考设计</a></h1>
+<div align = "center"><img src = "images/000080.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-444"></a><img src="images/000103.jpg" alt="Image 367" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="估算聚合成本"><a class="header" href="#估算聚合成本">估算聚合成本</a></h1>
+<div align = "center"><img src = "images/000130.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="常见用例场景"><a class="header" href="#常见用例场景">常见用例场景</a></h1>
+<div align = "center"><img src = "images/000160.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="内存消耗"><a class="header" href="#内存消耗">内存消耗</a></h1>
+<div align = "center"><img src = "images/000188.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="探索另外的设计"><a class="header" href="#探索另外的设计">探索另外的设计</a></h1>
+<div align = "center"><img src = "images/000239.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现最终一致性"><a class="header" href="#实现最终一致性">实现最终一致性</a></h1>
+<div align = "center"><img src = "images/000265.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="这是scrum团队成员的任务吗"><a class="header" href="#这是scrum团队成员的任务吗">这是Scrum团队成员的任务吗？</a></h1>
+<div align = "center"><img src = "images/000292.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-445"></a><img src="images/000320.jpg" alt="Image 374" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="实现-2"><a class="header" href="#实现-2">实现</a></h1>
+<div align = "center"><img src = "images/000347.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="创建具有唯一标识的根实体"><a class="header" href="#创建具有唯一标识的根实体">创建具有唯一标识的根实体</a></h1>
+<div align = "center"><img src = "images/000374.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="优先使用值对象"><a class="header" href="#优先使用值对象">优先使用值对象</a></h1>
+<div align = "center"><img src = "images/000406.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="使用迪米特法则和告诉而非询问原则"><a class="header" href="#使用迪米特法则和告诉而非询问原则">使用迪米特法则和“告诉而非询问”原则</a></h1>
+<div align = "center"><img src = "images/000433.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-446"></a><img src="images/000460.jpg" alt="Image 379" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="乐观并发"><a class="header" href="#乐观并发">乐观并发</a></h1>
+<div align = "center"><img src = "images/000487.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-447"></a><img src="images/000542.jpg" alt="Image 381" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="避免依赖注入"><a class="header" href="#避免依赖注入">避免依赖注入</a></h1>
+<div align = "center"><img src = "images/000569.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-10"><a class="header" href="#本章小结-10">本章小结</a></h1>
+<div align = "center"><img src = "images/000019.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="领域模型中的工厂"><a class="header" href="#领域模型中的工厂">领域模型中的工厂</a></h1>
+<div align = "center"><img src = "images/000045.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="领域模型中的工厂-1"><a class="header" href="#领域模型中的工厂-1">领域模型中的工厂</a></h1>
+<div align = "center"><img src = "images/000045.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="聚合根中的工厂方法"><a class="header" href="#聚合根中的工厂方法">聚合根中的工厂方法</a></h1>
+<div align = "center"><img src = "images/000072.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="创建calendarentry实例"><a class="header" href="#创建calendarentry实例">创建CalendarEntry实例</a></h1>
+<div align = "center"><img src = "images/000097.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-448"></a><img src="images/000124.jpg" alt="Image 387" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-449"></a><img src="images/000151.jpg" alt="Image 388" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-450"></a><img src="images/000178.jpg" alt="Image 389" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="创建discussion实例"><a class="header" href="#创建discussion实例">创建Discussion实例</a></h1>
+<div align = "center"><img src = "images/000206.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="领域服务中的工厂"><a class="header" href="#领域服务中的工厂">领域服务中的工厂</a></h1>
+<div align = "center"><img src = "images/000260.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-451"></a><img src="images/000287.jpg" alt="Image 392" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-452"></a><img src="images/000314.jpg" alt="Image 393" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-11"><a class="header" href="#本章小结-11">本章小结</a></h1>
+<div align = "center"><img src = "images/000342.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-453"></a><img src="images/000369.jpg" alt="Image 395" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="第12章-资源库"><a class="header" href="#第12章-资源库">第12章 资源库</a></h1>
+<div align = "center"><img src = "images/000396.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="面向集合资源库"><a class="header" href="#面向集合资源库">面向集合资源库</a></h1>
+<div align = "center"><img src = "images/000423.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-454"></a><img src="images/000450.jpg" alt="Image 398" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-455"></a><img src="images/000477.jpg" alt="Image 399" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-456"></a><img src="images/000503.jpg" alt="Image 400" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-457"></a><img src="images/000055.jpg" alt="Image 401" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="hibernate实现"><a class="header" href="#hibernate实现">Hibernate实现</a></h1>
+<div align = "center"><img src = "images/000504.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-458"></a><img src="images/000028.jpg" alt="Image 403" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-459"></a><img src="images/000108.jpg" alt="Image 404" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-460"></a><img src="images/000135.jpg" alt="Image 405" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-461"></a><img src="images/000162.jpg" alt="Image 406" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-462"></a><img src="images/000190.jpg" alt="Image 407" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-463"></a><img src="images/000217.jpg" alt="Image 408" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-464"></a><img src="images/000244.jpg" alt="Image 409" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="toplink实现"><a class="header" href="#toplink实现">TopLink实现</a></h1>
+<div align = "center"><img src = "images/000271.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-465"></a><img src="images/000326.jpg" alt="Image 411" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="面向持久化资源库"><a class="header" href="#面向持久化资源库">面向持久化资源库</a></h1>
+<div align = "center"><img src = "images/000353.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-466"></a><img src="images/000380.jpg" alt="Image 413" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="coherence实现"><a class="header" href="#coherence实现">Coherence实现</a></h1>
+<div align = "center"><img src = "images/000407.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-467"></a><img src="images/000434.jpg" alt="Image 415" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-468"></a><img src="images/000461.jpg" alt="Image 416" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-469"></a><img src="images/000488.jpg" alt="Image 417" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-470"></a><img src="images/000515.jpg" alt="Image 418" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="mongodb实现"><a class="header" href="#mongodb实现">MongoDB实现</a></h1>
+<div align = "center"><img src = "images/000543.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-471"></a><img src="images/000570.jpg" alt="Image 420" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-472"></a><img src="images/000046.jpg" alt="Image 421" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-473"></a><img src="images/000073.jpg" alt="Image 422" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-474"></a><img src="images/000098.jpg" alt="Image 423" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="额外的行为"><a class="header" href="#额外的行为">额外的行为</a></h1>
+<div align = "center"><img src = "images/000125.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-475"></a><img src="images/000152.jpg" alt="Image 425" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="管理事务"><a class="header" href="#管理事务">管理事务</a></h1>
+<div align = "center"><img src = "images/000179.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-476"></a><img src="images/000207.jpg" alt="Image 427" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-477"></a><img src="images/000234.jpg" alt="Image 428" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-478"></a><img src="images/000261.jpg" alt="Image 429" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="类型层级"><a class="header" href="#类型层级">类型层级</a></h1>
+<div align = "center"><img src = "images/000288.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-479"></a><img src="images/000343.jpg" alt="Image 431" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-480"></a><img src="images/000370.jpg" alt="Image 432" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="类型层级-1"><a class="header" href="#类型层级-1">类型层级</a></h1>
+<div align = "center"><img src = "images/000288.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-479"></a><img src="images/000343.jpg" alt="Image 431" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-480"></a><img src="images/000370.jpg" alt="Image 432" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="资源库-vs-数据访问对象dao"><a class="header" href="#资源库-vs-数据访问对象dao">资源库 vs 数据访问对象（DAO）</a></h1>
+<div align = "center"><img src = "images/000397.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="测试资源库"><a class="header" href="#测试资源库">测试资源库</a></h1>
+<div align = "center"><img src = "images/000424.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-481"></a><img src="images/000451.jpg" alt="Image 435" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-482"></a><img src="images/000478.jpg" alt="Image 436" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="以内存实现进行测试"><a class="header" href="#以内存实现进行测试">以内存实现进行测试</a></h1>
+<div align = "center"><img src = "images/000505.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-483"></a><img src="images/000533.jpg" alt="Image 438" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-484"></a><img src="images/000560.jpg" alt="Image 439" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-12"><a class="header" href="#本章小结-12">本章小结</a></h1>
+<div align = "center"><img src = "images/000011.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="集成基础知识"><a class="header" href="#集成基础知识">集成基础知识</a></h1>
+<div align = "center"><img src = "images/000064.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-485"></a><img src="images/000089.jpg" alt="Image 442" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="集成基础知识-1"><a class="header" href="#集成基础知识-1">集成基础知识</a></h1>
+<div align = "center"><img src = "images/000064.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-485"></a><img src="images/000089.jpg" alt="Image 442" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="跨系统边界交换信息"><a class="header" href="#跨系统边界交换信息">跨系统边界交换信息</a></h1>
+<div align = "center"><img src = "images/000116.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-486"></a><img src="images/000143.jpg" alt="Image 444" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-487"></a><img src="images/000170.jpg" alt="Image 445" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-488"></a><img src="images/000198.jpg" alt="Image 446" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-489"></a><img src="images/000225.jpg" alt="Image 447" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-490"></a><img src="images/000252.jpg" alt="Image 448" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="跨系统边界交换信息-1"><a class="header" href="#跨系统边界交换信息-1">跨系统边界交换信息</a></h1>
+<div align = "center"><img src = "images/000116.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-486"></a><img src="images/000143.jpg" alt="Image 444" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-487"></a><img src="images/000170.jpg" alt="Image 445" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-488"></a><img src="images/000198.jpg" alt="Image 446" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-489"></a><img src="images/000225.jpg" alt="Image 447" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-490"></a><img src="images/000252.jpg" alt="Image 448" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="通过rest资源集成限界上下文"><a class="header" href="#通过rest资源集成限界上下文">通过REST资源集成限界上下文</a></h1>
+<div align = "center"><img src = "images/000279.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="实现rest资源"><a class="header" href="#实现rest资源">实现REST资源</a></h1>
+<div align = "center"><img src = "images/000306.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-491"></a><img src="images/000361.jpg" alt="Image 451" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-492"></a><img src="images/000388.jpg" alt="Image 452" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="使用防腐层实现rest客户端"><a class="header" href="#使用防腐层实现rest客户端">使用防腐层实现REST客户端</a></h1>
+<div align = "center"><img src = "images/000415.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-493"></a><img src="images/000442.jpg" alt="Image 454" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-494"></a><img src="images/000469.jpg" alt="Image 455" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-495"></a><img src="images/000496.jpg" alt="Image 456" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-496"></a><img src="images/000523.jpg" alt="Image 457" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-497"></a><img src="images/000551.jpg" alt="Image 458" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-498"></a><img src="images/000004.jpg" alt="Image 459" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="从scrum的产品负责人和团队成员处得到持续通知"><a class="header" href="#从scrum的产品负责人和团队成员处得到持续通知">从Scrum的产品负责人和团队成员处得到持续通知</a></h1>
+<div align = "center"><img src = "images/000029.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-499"></a><img src="images/000081.jpg" alt="Image 461" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-500"></a><img src="images/000109.jpg" alt="Image 462" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-501"></a><img src="images/000136.jpg" alt="Image 463" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-502"></a><img src="images/000163.jpg" alt="Image 464" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-503"></a><img src="images/000191.jpg" alt="Image 465" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="从scrum的产品负责人和团队成员处得到持续通知-1"><a class="header" href="#从scrum的产品负责人和团队成员处得到持续通知-1">从Scrum的产品负责人和团队成员处得到持续通知</a></h1>
+<div align = "center"><img src = "images/000029.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-499"></a><img src="images/000081.jpg" alt="Image 461" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-500"></a><img src="images/000109.jpg" alt="Image 462" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-501"></a><img src="images/000136.jpg" alt="Image 463" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-502"></a><img src="images/000163.jpg" alt="Image 464" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-503"></a><img src="images/000191.jpg" alt="Image 465" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="你能处理这样的职责吗"><a class="header" href="#你能处理这样的职责吗">你能处理这样的职责吗？</a></h1>
+<div align = "center"><img src = "images/000218.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-504"></a><img src="images/000245.jpg" alt="Image 467" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-505"></a><img src="images/000272.jpg" alt="Image 468" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-506"></a><img src="images/000299.jpg" alt="Image 469" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-507"></a><img src="images/000327.jpg" alt="Image 470" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="长时处理过程以及避免职责"><a class="header" href="#长时处理过程以及避免职责">长时处理过程，以及避免职责</a></h1>
+<div align = "center"><img src = "images/000381.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-508"></a><img src="images/000408.jpg" alt="Image 472" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-509"></a><img src="images/000435.jpg" alt="Image 473" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-510"></a><img src="images/000462.jpg" alt="Image 474" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-511"></a><img src="images/000489.jpg" alt="Image 475" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-512"></a><img src="images/000516.jpg" alt="Image 476" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-513"></a><img src="images/000544.jpg" alt="Image 477" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-514"></a><img src="images/000571.jpg" alt="Image 478" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-515"></a><img src="images/000021.jpg" alt="Image 479" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-516"></a><img src="images/000047.jpg" alt="Image 480" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-517"></a><img src="images/000099.jpg" alt="Image 481" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="长时处理过程的状态机和超时跟踪器"><a class="header" href="#长时处理过程的状态机和超时跟踪器">长时处理过程的状态机和超时跟踪器</a></h1>
+<div align = "center"><img src = "images/000126.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-518"></a><img src="images/000153.jpg" alt="Image 483" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-519"></a><img src="images/000180.jpg" alt="Image 484" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-520"></a><img src="images/000208.jpg" alt="Image 485" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-521"></a><img src="images/000235.jpg" alt="Image 486" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-522"></a><img src="images/000262.jpg" alt="Image 487" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-523"></a><img src="images/000289.jpg" alt="Image 488" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-524"></a><img src="images/000316.jpg" alt="Image 489" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-525"></a><img src="images/000344.jpg" alt="Image 490" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-526"></a><img src="images/000398.jpg" alt="Image 491" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="设计一个更复杂的长时处理过程"><a class="header" href="#设计一个更复杂的长时处理过程">设计一个更复杂的长时处理过程</a></h1>
+<div align = "center"><img src = "images/000425.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-527"></a><img src="images/000452.jpg" alt="Image 493" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-528"></a><img src="images/000479.jpg" alt="Image 494" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-529"></a><img src="images/000506.jpg" alt="Image 495" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="当消息机制或你的系统不可用时"><a class="header" href="#当消息机制或你的系统不可用时">当消息机制或你的系统不可用时</a></h1>
+<div align = "center"><img src = "images/000534.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-13"><a class="header" href="#本章小结-13">本章小结</a></h1>
+<div align = "center"><img src = "images/000561.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="第14章-应用程序"><a class="header" href="#第14章-应用程序">第14章 应用程序</a></h1>
+<div align = "center"><img src = "images/000012.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-530"></a><img src="images/000038.jpg" alt="Image 499" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="用户界面"><a class="header" href="#用户界面">用户界面</a></h1>
+<div align = "center"><img src = "images/000065.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="渲染领域对象"><a class="header" href="#渲染领域对象">渲染领域对象</a></h1>
+<div align = "center"><img src = "images/000144.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="使用调停者发布聚合的内部状态"><a class="header" href="#使用调停者发布聚合的内部状态">使用调停者发布聚合的内部状态</a></h1>
+<div align = "center"><img src = "images/000171.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="使用调停者发布聚合的内部状态-1"><a class="header" href="#使用调停者发布聚合的内部状态-1">使用调停者发布聚合的内部状态</a></h1>
+<div align = "center"><img src = "images/000171.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="通过领域负载对象渲染聚合实例"><a class="header" href="#通过领域负载对象渲染聚合实例">通过领域负载对象渲染聚合实例</a></h1>
+<div align = "center"><img src = "images/000199.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="聚合实例的状态展现"><a class="header" href="#聚合实例的状态展现">聚合实例的状态展现</a></h1>
+<div align = "center"><img src = "images/000226.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="处理不同类型的客户端"><a class="header" href="#处理不同类型的客户端">处理不同类型的客户端</a></h1>
+<div align = "center"><img src = "images/000253.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="处理不同类型的客户端-1"><a class="header" href="#处理不同类型的客户端-1">处理不同类型的客户端</a></h1>
+<div align = "center"><img src = "images/000253.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="渲染适配器以及处理用户编辑"><a class="header" href="#渲染适配器以及处理用户编辑">渲染适配器以及处理用户编辑</a></h1>
+<div align = "center"><img src = "images/000280.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-531"></a><img src="images/000307.jpg" alt="Image 507" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-532"></a><img src="images/000335.jpg" alt="Image 508" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="示例应用服务"><a class="header" href="#示例应用服务">示例应用服务</a></h1>
+<div align = "center"><img src = "images/000362.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-533"></a><img src="images/000389.jpg" alt="Image 510" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-534"></a><img src="images/000443.jpg" alt="Image 511" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-535"></a><img src="images/000470.jpg" alt="Image 512" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-536"></a><img src="images/000497.jpg" alt="Image 513" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-537"></a><img src="images/000524.jpg" alt="Image 514" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-538"></a><img src="images/000552.jpg" alt="Image 515" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="示例应用服务-1"><a class="header" href="#示例应用服务-1">示例应用服务</a></h1>
+<div align = "center"><img src = "images/000362.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-533"></a><img src="images/000389.jpg" alt="Image 510" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-534"></a><img src="images/000443.jpg" alt="Image 511" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-535"></a><img src="images/000470.jpg" alt="Image 512" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-536"></a><img src="images/000497.jpg" alt="Image 513" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-537"></a><img src="images/000524.jpg" alt="Image 514" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-538"></a><img src="images/000552.jpg" alt="Image 515" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="解耦服务输出"><a class="header" href="#解耦服务输出">解耦服务输出</a></h1>
+<div align = "center"><img src = "images/000005.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-539"></a><img src="images/000030.jpg" alt="Image 517" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="组合多个限界上下文"><a class="header" href="#组合多个限界上下文">组合多个限界上下文</a></h1>
+<div align = "center"><img src = "images/000057.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-540"></a><img src="images/000082.jpg" alt="Image 519" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="基础设施"><a class="header" href="#基础设施">基础设施</a></h1>
+<div align = "center"><img src = "images/000110.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="企业组件容器"><a class="header" href="#企业组件容器">企业组件容器</a></h1>
+<div align = "center"><img src = "images/000164.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-541"></a><img src="images/000192.jpg" alt="Image 522" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-542"></a><img src="images/000219.jpg" alt="Image 523" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-543"></a><img src="images/000246.jpg" alt="Image 524" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="本章小结-14"><a class="header" href="#本章小结-14">本章小结</a></h1>
+<div align = "center"><img src = "images/000273.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="附录a-聚合与事件源aes"><a class="header" href="#附录a-聚合与事件源aes">附录A 聚合与事件源：A+ES</a></h1>
+<div align = "center"><img src = "images/000300.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="应用服务内部"><a class="header" href="#应用服务内部">应用服务内部</a></h1>
+<div align = "center"><img src = "images/000328.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-544"></a><img src="images/000355.jpg" alt="Image 528" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-545"></a><img src="images/000382.jpg" alt="Image 529" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-546"></a><img src="images/000409.jpg" alt="Image 530" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-547"></a><img src="images/000463.jpg" alt="Image 531" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-548"></a><img src="images/000490.jpg" alt="Image 532" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-549"></a><img src="images/000517.jpg" alt="Image 533" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-550"></a><img src="images/000545.jpg" alt="Image 534" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-551"></a><img src="images/000572.jpg" alt="Image 535" class="calibre2" /></p>  <div style="break-before: page; page-break-before: always;"></div><h1 id="命令处理器"><a class="header" href="#命令处理器">命令处理器</a></h1>
+<div align = "center"><img src = "images/000022.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-552"></a><img src="images/000048.jpg" alt="Image 537" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-553"></a><img src="images/000075.jpg" alt="Image 538" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="lambda语法"><a class="header" href="#lambda语法">Lambda语法</a></h1>
+<div align = "center"><img src = "images/000100.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-554"></a><img src="images/000127.jpg" alt="Image 540" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="并发控制"><a class="header" href="#并发控制">并发控制</a></h1>
+<div align = "center"><img src = "images/000181.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-555"></a><img src="images/000209.jpg" alt="Image 542" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-556"></a><img src="images/000236.jpg" alt="Image 543" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="性能"><a class="header" href="#性能">性能</a></h1>
+<div align = "center"><img src = "images/000263.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-557"></a><img src="images/000290.jpg" alt="Image 545" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-558"></a><img src="images/000317.jpg" alt="Image 546" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="性能-1"><a class="header" href="#性能-1">性能</a></h1>
+<div align = "center"><img src = "images/000263.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-557"></a><img src="images/000290.jpg" alt="Image 545" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-558"></a><img src="images/000317.jpg" alt="Image 546" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="实现事件存储"><a class="header" href="#实现事件存储">实现事件存储</a></h1>
+<div align = "center"><img src = "images/000345.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-559"></a><img src="images/000372.jpg" alt="Image 548" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-560"></a><img src="images/000399.jpg" alt="Image 549" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-561"></a><img src="images/000426.jpg" alt="Image 550" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="关系型持久化"><a class="header" href="#关系型持久化">关系型持久化</a></h1>
+<div align = "center"><img src = "images/000480.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-562"></a><img src="images/000507.jpg" alt="Image 552" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="blob持久化"><a class="header" href="#blob持久化">BLOB持久化</a></h1>
+<div align = "center"><img src = "images/000535.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-207"></a><img src="images/000562.jpg" alt="Image 554" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-208"></a><img src="images/000083.jpg" alt="Image 555" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-563"></a><img src="images/000031.jpg" alt="Image 556" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-564"></a><img src="images/000058.jpg" alt="Image 557" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-209"></a><img src="images/000111.jpg" alt="Image 558" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-565"></a><img src="images/000138.jpg" alt="Image 559" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="专注的聚合"><a class="header" href="#专注的聚合">专注的聚合</a></h1>
+<div align = "center"><img src = "images/000562.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="读模型投射"><a class="header" href="#读模型投射">读模型投射</a></h1>
+<div align = "center"><img src = "images/000083.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="增强事件"><a class="header" href="#增强事件">增强事件</a></h1>
+<div align = "center"><img src = "images/000111.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-566"></a><img src="images/000274.jpg" alt="Image 563" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-567"></a><img src="images/000301.jpg" alt="Image 564" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="增强事件-1"><a class="header" href="#增强事件-1">增强事件</a></h1>
+<div align = "center"><img src = "images/000111.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-566"></a><img src="images/000274.jpg" alt="Image 563" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-567"></a><img src="images/000301.jpg" alt="Image 564" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="工具和模式"><a class="header" href="#工具和模式">工具和模式</a></h1>
+<div align = "center"><img src = "images/000165.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="事件序列器"><a class="header" href="#事件序列器">事件序列器</a></h1>
+<div align = "center"><img src = "images/000220.jpg"/></div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="值对象"><a class="header" href="#值对象">值对象</a></h1>
+<div align = "center"><img src = "images/000247.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-568"></a><img src="images/000410.jpg" alt="Image 568" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="值对象-1"><a class="header" href="#值对象-1">值对象</a></h1>
+<div align = "center"><img src = "images/000247.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-568"></a><img src="images/000410.jpg" alt="Image 568" class="calibre2" /></p>    <div style="break-before: page; page-break-before: always;"></div><h1 id="协议生成"><a class="header" href="#协议生成">协议生成</a></h1>
+<div align = "center"><img src = "images/000329.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-569"></a><img src="images/000464.jpg" alt="Image 570" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-570"></a><img src="images/000518.jpg" alt="Image 571" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-571"></a><img src="images/000546.jpg" alt="Image 572" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-572"></a><img src="images/000573.jpg" alt="Image 573" class="calibre2" /></p><div style="break-before: page; page-break-before: always;"></div><h1 id="单元测试和需求规范"><a class="header" href="#单元测试和需求规范">单元测试和需求规范</a></h1>
+<div align = "center"><img src = "images/000356.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="事件源和函数式语言"><a class="header" href="#事件源和函数式语言">事件源和函数式语言</a></h1>
+<div align = "center"><img src = "images/000383.jpg"/></div><div style="break-before: page; page-break-before: always;"></div><h1 id="参考文献"><a class="header" href="#参考文献">参考文献</a></h1>
+<div align = "center"><img src = "images/000437.jpg"/></div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

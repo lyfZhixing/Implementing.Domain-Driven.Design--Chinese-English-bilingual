@@ -1,0 +1,4 @@
+# 长时处理过程（也叫Saga） 
+
+<div align = "center"><img src = "images/000540.jpg"/></div>
+ <p class="calibre1"><a id="calibre_link-337"></a><img src="images/000567.jpg" alt="Image 172" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-338"></a><img src="images/000015.jpg" alt="Image 173" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-339"></a><img src="images/000042.jpg" alt="Image 174" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-340"></a><img src="images/000069.jpg" alt="Image 175" class="calibre2" /></p> <p class="calibre1"><a id="calibre_link-341"></a><img src="images/000094.jpg" alt="Image 176" class="calibre2" /></p>  

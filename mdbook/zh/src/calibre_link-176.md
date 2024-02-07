@@ -1,0 +1,4 @@
+# 使用防腐层实现REST客户端 
+
+<div align = "center"><img src = "images/000415.jpg"/></div>
+  <p class="calibre1"><a id="calibre_link-493"></a><img src="images/000442.jpg" alt="Image 454" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-494"></a><img src="images/000469.jpg" alt="Image 455" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-495"></a><img src="images/000496.jpg" alt="Image 456" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-496"></a><img src="images/000523.jpg" alt="Image 457" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-497"></a><img src="images/000551.jpg" alt="Image 458" class="calibre2" /></p>  <p class="calibre1"><a id="calibre_link-498"></a><img src="images/000004.jpg" alt="Image 459" class="calibre2" /></p>    

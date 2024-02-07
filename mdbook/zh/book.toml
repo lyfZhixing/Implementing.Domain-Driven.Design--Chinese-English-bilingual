@@ -1,0 +1,6 @@
+[book]
+authors = ["lyfZhixing"]
+language = "zh"
+multilingual = false
+src = "src"
+title = "实现领域驱动设计"
